@@ -1,4 +1,4 @@
-.pupup__about {
+.popup__about {
     width: 358px;
     height: 27px;
     margin-top: 30px;
@@ -12,7 +12,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .pupup__about {
+    .popup__about {
         max-width: 238px;
     }
 }
