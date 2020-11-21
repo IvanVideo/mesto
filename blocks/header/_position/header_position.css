@@ -1,0 +1,15 @@
+.header_position {
+    margin: 45px auto 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .header_position {
+        margin-top: 35px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header_position {
+        margin-top: 28px;
+    }
+}

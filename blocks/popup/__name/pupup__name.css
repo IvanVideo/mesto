@@ -1,0 +1,19 @@
+.pupup__name {
+    width: 358px;
+    margin-top: 48px;
+    height: 27px;
+    padding: 0;
+    padding: 0;
+    border: 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+@media screen and (max-width: 768px) {
+    .pupup__name {
+        max-width: 238px;
+    }
+}

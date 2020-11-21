@@ -1,0 +1,15 @@
+.profile_position {
+    margin-top: 40px;
+}
+
+@media screen and (max-width: 1024px) {
+    .profile_position {
+        margin-top: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile_position {
+        margin-top: 42px;
+    }
+}
