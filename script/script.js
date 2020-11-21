@@ -1,12 +1,12 @@
-const profileButton = document.querySelector('.profile__link');
-const popup = document.querySelector('.popup');
-const profileButtonClose = document.querySelector('.popup__close');
-const popupClose = document.querySelector('.popup');
-const popupNameForm = document.querySelector('.pupup__name');
-const popupAboutForm = document.querySelector('.pupup__about');
-const popupButtonSave = document.querySelector('.popup__button');
-const profileName = document.querySelector('.profile__title');
-const profileAbout = document.querySelector('.profile__subtitle');
+let profileButton = document.querySelector('.profile__link');
+let popup = document.querySelector('.popup');
+let profileButtonClose = document.querySelector('.popup__close');
+let popupClose = document.querySelector('.popup');
+let popupNameForm = document.querySelector('.pupup__name');
+let popupAboutForm = document.querySelector('.pupup__about');
+let popupButtonSave = document.querySelector('.popup__button');
+let profileName = document.querySelector('.profile__title');
+let profileAbout = document.querySelector('.profile__subtitle');
 
 profileButton.addEventListener('click', handleProfileButtonClik)
 profileButtonClose.addEventListener('click', handleProfileButtonCloseClik)
