@@ -1,0 +1,10 @@
+.element__heart-like {
+    background-image: url(../../../images/heart.svg) no-repeat cover;
+    background-color: #fff;
+    border: none;
+    padding: 0;
+}
+
+.element__heart-like:hover {
+    cursor: pointer;
+}

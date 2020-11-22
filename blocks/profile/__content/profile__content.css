@@ -2,7 +2,7 @@
     color: white;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: none;
 }
 
 @media screen and (max-width: 768px) {

@@ -1,5 +1,5 @@
 .popup__name {
-    width: 358px;
+    max-width: 358px;
     margin-top: 48px;
     height: 27px;
     padding: 0;

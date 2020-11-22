@@ -1,15 +1,15 @@
-.header_position {
+.header_position_content {
     margin: 45px auto 0;
 }
 
 @media screen and (max-width: 1024px) {
-    .header_position {
+    .header_position_content {
         margin-top: 35px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .header_position {
+    .header_position_content {
         margin-top: 28px;
     }
 }

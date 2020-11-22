@@ -4,8 +4,7 @@
     background-color: #000;
     background: url(../../../images/Vector\ —\ копия.png) no-repeat 50% 50%;
     border: 2px solid white;
-    position: absolute;
-    right: 0;
+    display: flex;
 }
 
 .profile__button:hover {

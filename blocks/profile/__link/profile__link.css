@@ -1,10 +1,10 @@
 .profile__link {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     background: url(../../../images/Edit\ Button.png) no-repeat 50% 50%;
     border: none;
-    margin-left: 20px;
-    margin-bottom: 18px;
+    padding: 0;
+    margin-left: 18px;
 }
 
 .profile__link:hover {

@@ -11,7 +11,6 @@
 
 @media screen and (max-width: 768px) {
     .element {
-        max-width: 282px;
         justify-self: center;
     }
 }

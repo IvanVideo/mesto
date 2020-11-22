@@ -1,91 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mesto</title>
     <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="body">
-    <header class="header header_position">
+    <header class="header header_position_content">
         <img src="./images/Vector.png" alt="Логотип Место" class="logo logo_top-position">
     </header>
     <main>
-        <div class="profile profile_position">
-            <img src="./images/image.png" alt="Жак-Ив Кусто" class="profile__image">
+        <section class="profile profile_position_content">
+            <div class="profile__main">
+                <img src="./images/image.png" alt="Жак-Ив Кусто" class="profile__image">
                 <div class="profile__content">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
                     <p class="profile__subtitle">Исследователь океана</p>
                 </div>
-                <button class="profile__link"></button>
-                <button class="profile__button"></button>
-        </div>
-        <div class="elements elements_position">
+            </div>
+            <div class="profile__buttons">
+                <button class="profile__link" type="button"></button>
+                <button class="profile__button" type="button"></button>
+            </div>
+        </section>
+        <section class="elements elements_position_content">
             <div class="element">
-                <img src="./images//S1e6_cronenberg_russia (1) (1).png" alt="Карачаевск" class="element__imag">
+                <img src="./images//S1e6_cronenberg_russia.png" alt="Измерение 35" class="element__imag">
                 <div class="element__content">
                     <h2 class="element__title">Измерение 35</h2>
-                    <a href="#" class="element__heart-like" target="_self"><img src="./images/Vector — heart 2.png" alt="Кнопка лайка"
-                            class="element__heart"></a>
+                    <button class="element__heart-like"><img src="./images/Vector_heart_2.png" alt="Кнопка лайка"
+                            class="element__heart"></button>
                 </div>
             </div>
             <div class="element">
-                <img src="./images/Постапокалиптическое_измерение_001 (2).jpg" alt="Гора Эльбрус" class="element__imag">
+                <img src="./images/e_001.jpg" alt="Измерение 01-1" class="element__imag">
                 <div class="element__content">
                     <h2 class="element__title">Измерение 01-1</h2>
-                    <a href="#" class="element__heart-like" target="_self"><img src="./images/Vector — heart 2.png" alt="Кнопка лайка"
-                            class="element__heart"></a>
+                    <button class="element__heart-like"><img src="./images/Vector_heart_2.png" alt="Кнопка лайка"
+                            class="element__heart"></button>
                 </div>
             </div>
             <div class="element">
-                <img src="./images/The_Ricks_Must_be_Crazy-1-2.png" alt="Домбай" class="element__imag">
+                <img src="./images/The_Ricks_Must_be_Crazy-1-2.png" alt="змерение Z" class="element__imag">
                 <div class="element__content">
                     <h2 class="element__title">Измерение Z</h2>
-                    <a href="#" class="element__heart-like" target="_self"><img src="./images/Vector — heart 2.png" alt="Кнопка лайка"
-                            class="element__heart"></a>
+                    <button class="element__heart-like"><img src="./images/Vector_heart_2.png" alt="Кнопка лайка"
+                            class="element__heart"></button>
                 </div>
             </div>
             <div class="element">
-                <img src="./images/rik-i-morti-rick-and-morty-rick-sanchez-rick-sanchez-morty-7.jpg" alt="Гора Эльбрус"
+                <img src="./images/rik-i-morti-rick-and-morty-rick-sanchez-rick-sanchez-morty-7.jpg" alt="Измерение Y6"
                     class="element__imag">
                 <div class="element__content">
                     <h2 class="element__title">Измерение Y6</h2>
-                    <a href="#" class="element__heart-like" target="_self"><img src="./images/Vector — heart 2.png" alt="Кнопка лайка"
-                            class="element__heart"></a>
+                    <button class="element__heart-like"><img src="./images/Vector_heart_2.png" alt="Кнопка лайка"
+                            class="element__heart"></button>
                 </div>
             </div>
             <div class="element">
-                <img src="./images/Rick-and-Morty-digital-art-tv-series-aliens-1799935.jpg" alt="Домбай"
+                <img src="./images/Rick-and-Morty-digital-art-tv-series-aliens-1799935.jpg" alt="Измерение 00"
                     class="element__imag">
                 <div class="element__content">
                     <h2 class="element__title">Измерение 00</h2>
-                    <a href="#" class="element__heart-like" target="_self"><img src="./images/Vector — heart 2.png" alt="Кнопка лайка"
-                            class="element__heart"></a>
+                    <button class="element__heart-like"><img src="./images/Vector_heart_2.png" alt="Кнопка лайка"
+                            class="element__heart"></button>
                 </div>
             </div>
             <div class="element">
-                <img src="./images/orig (1).jpeg" alt="Карачаево-Ч..." class="element__imag">
+                <img src="./images/orig.jpeg" alt="Измерение II" class="element__imag">
                 <div class="element__content">
                     <h2 class="element__title">Измерение II</h2>
-                    <a href="#" class="element__heart-like"  target="_self"><img src="./images/Vector — heart 2.png" alt="Кнопка лайка"
-                            class="element__heart"></a>
+                    <button class="element__heart-like"><img src="./images/Vector_heart_2.png" alt="Кнопка лайка"
+                            class="element__heart"></button>
                 </div>
             </div>
-        </div>
-        <div class="footer">
-            <div class="footer__position">
+        </section>
+        <section class="footer">
             <p class="footer__content">© 2020 Mesto Russia</p>
-            </div>
-        </div>
+        </section>
         <div class="popup">
             <div class="popup__container">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input type="text" class="popup__name" value="">
-                <input type="text" class="popup__about" value="">
-                <button class="popup__button">Сохранить</button>
-                <a href="#" class="popup__close" target="_self"></a>
+                <input type="text" class="popup__name" value="" name="name">
+                <input type="text" class="popup__about" value="" name="about">
+                <form action="#">
+                    <button class="popup__button" type="button">Сохранить</button>
+                    <button class="popup__close" type="button"></button>
+                </form>
             </div>
         </div>
     </main>

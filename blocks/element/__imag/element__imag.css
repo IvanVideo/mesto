@@ -3,15 +3,3 @@
     max-height: 100%;
     border-radius: 10px 10px 0 0;
 }
-
-@media screen and (max-width: 1024px) {
-    .element__imag {
-        max-width: 100%;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .element__imag {
-        max-width: 100%;
-    }
-}
