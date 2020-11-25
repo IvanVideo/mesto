@@ -7,4 +7,5 @@
 
 .element__heart-like:hover {
     cursor: pointer;
+    opacity: 0.6;
 }
