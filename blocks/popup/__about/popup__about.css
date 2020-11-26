@@ -1,5 +1,5 @@
 .popup__about {
-    max-width: 358px;
+    width: 100%;
     height: 27px;
     margin-top: 30px;
     padding: 0;
@@ -9,10 +9,4 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-}
-
-@media screen and (max-width: 768px) {
-    .popup__about {
-        max-width: 238px;
-    }
 }
