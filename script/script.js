@@ -27,3 +27,5 @@ function formSubmitHandler (evt) {
     profileAbout.textContent = popupAboutForm.value;
     handleProfileButtonCloseClik() 
 }
+
+function (elements);
