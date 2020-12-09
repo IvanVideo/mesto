@@ -34,4 +34,23 @@
 @import url('../blocks/profile/__buttons/profile__buttons.css');
 @import url('../blocks/profile/__main/profile__main.css');
 @import url('../blocks/popup/__form/popup__form.css');
-
+@import url('../blocks/popupelements/popupelements.css');
+@import url('../blocks/popupelements/__container/popupelements__container.css');
+@import url('../blocks/popupelements/__title/popupelements__title.css');
+@import url('../blocks/popupelements/__form/popupelements__form.css');
+@import url('../blocks/popupelements/__name/popupelements__name.css');
+@import url('../blocks/popupelements/__about/popupelements__about.css');
+@import url('../blocks/popupelements/__button/popupelements__button.css');
+@import url('../blocks/popupelements/__close/popupelements__close.css');
+@import url('../blocks/popupelements/_opened/popupelements_opened.css');
+@import url('../blocks/element/__trash/element__trash.css');
+@import url('../blocks/element/__pic/element__pic.css');
+@import url('../blocks/element/__button/element__button.css');
+@import url('../blocks');
+@import url('../blocks');
+@import url('../blocks');
+@import url('../blocks');
+@import url('../blocks');
+@import url('../blocks');
+@import url('../blocks');
+@import url('../blocks');

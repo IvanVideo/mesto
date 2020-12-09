@@ -1,0 +1,9 @@
+.popupelements {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(30, 30, 30, 0.3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    display: none;
+}
