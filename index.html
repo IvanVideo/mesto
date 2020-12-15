@@ -44,30 +44,36 @@
         <p class="footer__content">© 2020 Mesto Russia</p>
     </footer>
     <div class="popup">
-        <div class="popup__container">
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <form action="#" class="popup__form" name="form">
-                <input type="text" class="popup__name" value="" name="name">
-                <input type="text" class="popup__about" value="" name="about">
-                <button class="popup__button" type="submit">Сохранить</button>
-                <button class="popup__close" type="button"></button>
-            </form>
+        <div class="popup__element">
+            <div class="popup__container">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <form action="#" class="popup__form" name="form">
+                    <input type="text" class="popup__name" value="" name="name">
+                    <input type="text" class="popup__about" value="" name="about">
+                    <button class="popup__button" type="submit">Сохранить</button>
+                    <button class="popup__close" type="button"></button>
+                </form>
+            </div>
         </div>
     </div>
     <div class="popup popup-elements">
+        <div class="popup__element">
         <div class="popup__container">
             <h2 class="popup__title">Новое место</h2>
             <form action="#" class="popup__form" name="form">
-                <input type="text" class="popup__name popup__name_color popup-elements__name" placeholder="Название" name="name">
-                <input type="text" class="popup__about popup-elements__about" placeholder="Ссылка на картинку" name="about">
+                <input type="text" class="popup__name popup__name_color popup-elements__name" placeholder="Название"
+                    name="name">
+                <input type="text" class="popup__about popup-elements__about" placeholder="Ссылка на картинку"
+                    name="about">
                 <button class="popup__button popup-elements__button" type="submit">Создать</button>
                 <button class="popup__close popup-elements__close" type="button"></button>
             </form>
         </div>
+        </div>
     </div>
 
     <div class="popup popup-img">
-        <div>
+        <div class="popup__element">
             <div class="popup__box">
                 <img src="#" alt="Ничего" class="popup__pic">
                 <button class="popup__close popup-img__close" type="button"></button>
