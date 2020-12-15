@@ -1,5 +1,8 @@
 .element__heart-like_active {
     background-image: url(..//..//..//..//images/Union.png);
-    width: 100px;
-    background-color: rgb(0, 0, 0);
+    background-color: #fff;
+    border: none;
+    padding: 0;
+    width: 19.3px;
+    height: 18px;
 }

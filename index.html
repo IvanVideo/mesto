@@ -29,15 +29,15 @@
         <template class="tamplate">
             <div class="element">
                 <img src="#" alt="Измерение 35" class="element__imag">
-               <button class="element__trash" type="button"><img src="./images/Trash.svg" alt="" class="element__pic"></button>
+                <button class="element__trash" type="button"><img src="./images/Trash.svg" alt="Корзина"
+                        class="element__pic"></button>
                 <div class="element__content">
                     <h2 class="element__title"></h2>
-                    <button class="element__heart-like" type="button"><img src="./images/Vector_heart_2.png"
-                            alt="Кнопка лайка" class="element__heart"></button>
+                    <button class="element__heart-like" type="button"></button>
                 </div>
             </div>
-        </template> 
-        <section class="elements elements_position_content">   
+        </template>
+        <section class="elements elements_position_content">
         </section>
     </main>
     <footer class="footer">
@@ -58,8 +58,8 @@
         <div class="popup__container">
             <h2 class="popup__title">Новое место</h2>
             <form action="#" class="popup__form" name="form">
-                <input type="text" class="popup__name popup-elements__name" value="Название" name="name">
-                <input type="text" class="popup__about popup-elements__about" value="Ссылка на картинку" name="about">
+                <input type="text" class="popup__name popup__name_color popup-elements__name" placeholder="Название" name="name">
+                <input type="text" class="popup__about popup-elements__about" placeholder="Ссылка на картинку" name="about">
                 <button class="popup__button popup-elements__button" type="submit">Создать</button>
                 <button class="popup__close popup-elements__close" type="button"></button>
             </form>
@@ -67,10 +67,12 @@
     </div>
 
     <div class="popup popup-img">
-        <div class="popup__content">
+        <div>
+            <div class="popup__box">
                 <img src="#" alt="Ничего" class="popup__pic">
                 <button class="popup__close popup-img__close" type="button"></button>
-                <p class="popup__subtitle">Редактировать профиль</p>
+            </div>
+            <p class="popup__subtitle">Редактировать профиль</p>
         </div>
     </div>
     <script src="./script/script.js"></script>

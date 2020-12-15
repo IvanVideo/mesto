@@ -1,8 +1,10 @@
 .element__heart-like {
-    background-image: url(../../../images/heart.svg) no-repeat cover;
+    background-image: url(../../../images/heart.svg);
     background-color: #fff;
     border: none;
     padding: 0;
+    width: 19.3px;
+    height: 18px;
 }
 
 .element__heart-like:hover {

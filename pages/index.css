@@ -39,6 +39,10 @@
 @import url('../blocks/popup/__content/popup__content.css');
 @import url('../blocks/popup/__img/popup__img.css');
 @import url('../blocks/element/__heart-like/_active/element__heart-like_active.css');
-@import url('../blocks');
-@import url('../blocks');
-@import url('../blocks');
+@import url('../blocks/popup/__box/popup__box.css');
+@import url('../blocks/popup/__subtitle/popup__subtitle.css');
+@import url('../blocks/popup/__pic/popup__pic.css');
+@import url('../blocks/popup/_img/popup_img.css');
+
+
+

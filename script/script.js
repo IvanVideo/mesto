@@ -7,7 +7,7 @@ let popupTitle = document.querySelector('.popup__title');
 let popupButtonExist = document.querySelector('.popup__button');
 const popupElements = document.querySelector('.popup-elements');
 const elementsContentcards = document.querySelector('.elements');
-const popupImgCloseButton = document.querySelector('.popup-img__close');//.addEventListener('click', closePopupElementImg);
+const popupImgCloseButton = document.querySelector('.popup-img__close');
 const popupImag = document.querySelector('.popup-img');
 
 //Открытие popup-формы редактирования информации профиля
@@ -87,20 +87,28 @@ function renderElements() {
 
 function composeItem({name, link}) {
     const newElement = templateElement.content.cloneNode(true);
+
     const imgElement = newElement.querySelector('.element__imag');
     imgElement.src = link;
-    imgElement.addEventListener('click', function() {
+     imgElement.addEventListener('click', function() {
         openPopupElementImg(popupImag)
+        const popupImg = document.querySelector('.popup__pic');
+        popupImg.src = link;
     });
+
     popupImgCloseButton.addEventListener('click', function(){
         closePopupElementImg(popupImag)
     });
+
     const removeButtonElement = newElement.querySelector('.element__trash');
     removeButtonElement.addEventListener('click', remuveElement);
+
     const buttonLike = newElement.querySelector('.element__heart-like');
     buttonLike.addEventListener('click', likeActive);
+
     const nameElement = newElement.querySelector('.element__title');
     nameElement.textContent = name;
+
     return newElement;
 }
 
@@ -129,7 +137,7 @@ function remuveElement(event) {
 
 //Функция открытия popup-элемента картинки
 function openPopupElementImg(modal) {
-    modal.classList.add('popup_opened');
+    modal.classList.add('popup_opened', 'popup_img');
 }
 
 //Функция закрытия popup-элемента картинки
@@ -138,12 +146,10 @@ function closePopupElementImg(modal) {
 }
 
 //Функция добавления лайков
-function likeActive() {
-    const imgLike = document.querySelector('.element__heart')
-    imgLike.classList.toggle('element__heart-like_active');
+function likeActive(evt) {
+    const picLike = evt.target;
+    picLike.classList.toggle('element__heart-like_active')
 }
-
-
 
 renderElements();
 addElementToTheGallery();
