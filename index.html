@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./pages/index.css">
 </head>
 
-<body class="body">
+<body class="body root">
     <header class="header header_position_content">
         <img src="./images/Vector.png" alt="Логотип Место" class="logo logo_top-position">
     </header>
@@ -26,57 +26,57 @@
                 <button class="profile__button" type="button"></button>
             </div>
         </section>
-        <template class="tamplate">
-            <div class="element">
-                <img src="#" alt="Измерение 35" class="element__imag">
-                <button class="element__trash" type="button"><img src="./images/Trash.svg" alt="Корзина"
-                        class="element__pic"></button>
-                <div class="element__content">
-                    <h2 class="element__title"></h2>
-                    <button class="element__heart-like" type="button"></button>
-                </div>
-            </div>
-        </template>
         <section class="elements elements_position_content">
         </section>
     </main>
     <footer class="footer">
         <p class="footer__content">© 2020 Mesto Russia</p>
     </footer>
-    <div class="popup">
-            <div class="popup__container">
-                <h2 class="popup__title">Редактировать профиль</h2>
-                <form action="#" class="popup__form" name="form">
-                    <input type="text" class="popup__name" value="" name="name">
-                    <input type="text" class="popup__about" value="" name="about">
-                    <button class="popup__button" type="submit">Сохранить</button>
-                    <button class="popup__close" type="button"></button>
-                </form>
-            </div>
+    <div class="popup popup_profile">
+        <div class="popup__container">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form action="#" class="popup__form popup__form_profile" name="form">
+                <input type="text" class="popup__input popup__input_profile_name" value="" name="name" required>
+                <input type="text" class="popup__input popup__input_profile_about" value="" name="about" required>
+                <button class="popup__button" type="submit">Сохранить</button>
+            </form>
+            <button class="popup__close" type="button"></button>
+        </div>
     </div>
     <div class="popup popup-elements">
         <div class="popup__container">
             <h2 class="popup__title">Новое место</h2>
-            <form action="#" class="popup__form" name="form">
-                <input type="text" class="popup__name popup__name_color popup-elements__name" placeholder="Название"
-                    name="name">
-                <input type="text" class="popup__about popup-elements__about" placeholder="Ссылка на картинку"
-                    name="about">
+            <form action="#" class="popup__form popup__form_elements" name="form">
+                <input type="text" class="popup__input popup__input_elements_name" popup__name placeholder="Название"
+                    name="place" required>
+                <input type="url" class="popup__input popup__input_elements_url" popup__about
+                    placeholder="Ссылка на картинку" name="adress" required>
                 <button class="popup__button popup-elements__button" type="submit">Создать</button>
-                <button class="popup__close popup-elements__close" type="button"></button>
             </form>
+            <button class="popup__close popup-elements__close" type="button"></button>
         </div>
     </div>
-
     <div class="popup popup-img">
         <div class="popup__element">
             <div class="popup__box">
-                <img src="#" alt="Ничего" class="popup__pic">
+                <img src="#" alt="" class="popup__pic">
                 <button class="popup__close popup-img__close" type="button"></button>
             </div>
-            <p class="popup__subtitle">Редактировать профиль</p>
+            <p class="popup__subtitle"></p>
         </div>
     </div>
+    <template class="template">
+        <div class="element">
+            <div class="element__block"><img src="#" alt="" class="element__imag"></div>
+            <button class="element__trash" type="button"><img src="./images/Trash.svg" alt="Корзина"
+                    class="element__pic"></button>
+            <div class="element__content">
+                <h2 class="element__title"></h2>
+                <button class="element__heart-like" type="button"></button>
+            </div>
+        </div>
+    </template>
+    <script src="./script/initial-сards.js"></script>
     <script src="./script/script.js"></script>
 </body>
 

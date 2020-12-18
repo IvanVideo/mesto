@@ -1,83 +1,64 @@
-let popup = document.querySelector('.popup');
-let popupNameForm = document.querySelector('.popup__name');
-let popupAboutForm = document.querySelector('.popup__about');
-let profileName = document.querySelector('.profile__title');
-let profileAbout = document.querySelector('.profile__subtitle');
-let popupTitle = document.querySelector('.popup__title');
-let popupButtonExist = document.querySelector('.popup__button');
+const popupProfile = document.querySelector('.popup_profile');
+const popupProfileNameForm = document.querySelector('.popup__input_profile_name');
+const popupProfileAboutForm = document.querySelector('.popup__input_profile_about');
+const profileName = document.querySelector('.profile__title');
+const profileAbout = document.querySelector('.profile__subtitle');
+const popupButtonExist = document.querySelector('.popup__button');
 const popupElements = document.querySelector('.popup-elements');
-const elementsContentcards = document.querySelector('.elements');
+const elementsContentCards = document.querySelector('.elements');
 const popupImgCloseButton = document.querySelector('.popup-img__close');
 const popupImag = document.querySelector('.popup-img');
+const addButton = document.querySelector('.popup-elements__button');
+const popupImagSubtitle = document.querySelector('.popup__subtitle');
 
 //Открытие popup-формы редактирования информации профиля
-let profileButton = document.querySelector('.profile__link').addEventListener('click', handleProfileButtonClik)
 function handleProfileButtonClik() {
-    popup.classList.add('popup_opened');
-    popupNameForm.value = profileName.textContent;
-    popupAboutForm.value = profileAbout.textContent;
+    popupProfile.classList.add('popup_opened');
+    popupProfileNameForm.value = profileName.textContent;
+    popupProfileAboutForm.value = profileAbout.textContent;
 }
+const profileButton = document.querySelector('.profile__link');
+profileButton.addEventListener('click', function(){
+    handleProfileButtonClik()
+ })
 
 //Открытие popu-формы для добавления нового элемента
-const buttonAddElements = document.querySelector('.profile__button').addEventListener('click', openPopupAddElements)
 function openPopupAddElements() {
     popupElements.classList.toggle('popup_opened');
 }
+const buttonAddElements = document.querySelector('.profile__button');
+buttonAddElements.addEventListener('click', function(){
+    openPopupAddElements()
+ })
 
-//Закрытие popup-формы редактирования профиля
-let profileButtonClose = document.querySelector('.popup__close').addEventListener('click', handleProfileButtonCloseClik)
-function handleProfileButtonCloseClik() {
-    popup.classList.remove('popup_opened');
-}
+const profileButtonClose = document.querySelectorAll('.popup__close');
+const popupForms = document.querySelectorAll('.popup');
 
-//Закрытие popup-формы добавления новых элементов
-let buttonClosePopupAddElements = document.querySelector('.popup-elements__close').addEventListener('click', closePopupAddElements)
-function closePopupAddElements() {
-    popupElements.classList.toggle('popup_opened');
-}
+profileButtonClose.forEach(function (item) {
+    item.addEventListener('click', function () {
+        profileButtonClose.forEach(function () {
+            popupForms.forEach(function(item) {
+                item.classList.remove('popup_opened');
+            })
+        })
+    })
+})
 
-//Функция присвоения значений профиля из popup-формы
-let popupForm = document.querySelector('.popup__form').addEventListener('submit', formSubmitHandler)
-function formSubmitHandler (evt) {
+// Функция присвоения значений профиля из popup-формы
+function formSubmitHandler(evt) {
     evt.preventDefault();
-    profileName.textContent = popupNameForm.value;
-    profileAbout.textContent = popupAboutForm.value;
-    handleProfileButtonCloseClik() 
+    profileName.textContent = popupProfileNameForm.value;
+    profileAbout.textContent = popupProfileAboutForm.value;
+    popupProfile.classList.remove('popup_opened')
 }
 
-
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
-
+const popupProfileForm = popupProfile.querySelector('.popup__form_profile');
+popupProfileForm.addEventListener('submit', formSubmitHandler)
 
 const conteinerElements = document.querySelector('.elements');
-const templateElement = document.querySelector('.tamplate');
-const inputNamePopupAddElements = document.querySelector('.popup-elements__name');
-const imgLinkElement = document.querySelector('.popup-elements__about');
+const templateElement = document.querySelector('.template');
+const inputNamePopupAddElements = document.querySelector('.popup__input_elements_name');
+const imgLinkElement = document.querySelector('.popup__input_elements_url');
 
 //Рендер элементов галереи 
 function renderElements() {
@@ -85,23 +66,28 @@ function renderElements() {
     conteinerElements.append(...elementsArray);
 }
 
-function composeItem({name, link}) {
+function composeItem({ name, link }) {
     const newElement = templateElement.content.cloneNode(true);
 
     const imgElement = newElement.querySelector('.element__imag');
     imgElement.src = link;
-     imgElement.addEventListener('click', function() {
+    imgElement.alt = name;
+    imgElement.addEventListener('click', function () {
         openPopupElementImg(popupImag)
         const popupImg = document.querySelector('.popup__pic');
         popupImg.src = link;
+        popupImg.alt = name;
     });
-
-    popupImgCloseButton.addEventListener('click', function(){
+    function openPopupElementImg(modal) {
+        modal.classList.add('popup_opened', 'popup_img');
+        popupImagSubtitle.textContent = name;
+    }
+    popupImgCloseButton.addEventListener('click', function () {
         closePopupElementImg(popupImag)
     });
 
     const removeButtonElement = newElement.querySelector('.element__trash');
-    removeButtonElement.addEventListener('click', remuveElement);
+    removeButtonElement.addEventListener('click', removeElement);
 
     const buttonLike = newElement.querySelector('.element__heart-like');
     buttonLike.addEventListener('click', likeActive);
@@ -116,28 +102,20 @@ function composeItem({name, link}) {
 function addNewElement() {
     const nameCard = inputNamePopupAddElements.value;
     const linkImgCard = imgLinkElement.value;
-    const newItem = composeItem({name: nameCard, link: linkImgCard});
+    const newItem = composeItem({ name: nameCard, link: linkImgCard });
     conteinerElements.prepend(newItem);
     inputNamePopupAddElements.value = ''
-    imgLinkElement.value = '' 
-    closePopupAddElements()
+    imgLinkElement.value = ''
+    popupElements.classList.remove('popup_opened')
 }
 
 //Функция и колбэк кнопки добавления нового элемента
-function addElementToTheGallery() {
-    const addButton = document.querySelector('.popup-elements__button');
-    addButton.addEventListener('click', addNewElement)
-}
+const popupElementsForm = popupElements.querySelector('.popup__form_elements');
+popupElementsForm.addEventListener('submit', addNewElement)
 
 //Функция удаление элемента
-function remuveElement(event) {
-    const targetElement = event.target.closest('.element')
-    targetElement.remove();
-}
-
-//Функция открытия popup-элемента картинки
-function openPopupElementImg(modal) {
-    modal.classList.add('popup_opened', 'popup_img');
+function removeElement(event) {
+    const targetElement = event.target.closest('.element').remove()
 }
 
 //Функция закрытия popup-элемента картинки
@@ -152,4 +130,3 @@ function likeActive(evt) {
 }
 
 renderElements();
-addElementToTheGallery();
