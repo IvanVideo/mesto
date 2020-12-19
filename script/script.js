@@ -10,39 +10,49 @@ const popupImgCloseButton = document.querySelector('.popup-img__close');
 const popupImag = document.querySelector('.popup-img');
 const addButton = document.querySelector('.popup-elements__button');
 const popupImagSubtitle = document.querySelector('.popup__subtitle');
+const popup = document.querySelector('.popup');
+const buttonAddElements = document.querySelector('.profile__button');
+const profileButton = document.querySelector('.profile__link');
+const profileButtonClose = document.querySelector('.popup__close');
+const popupForms = document.querySelectorAll('.popup');
+const buttonCloseAddElementsForm = document.querySelector('.popup-elements__close');
 
-//Открытие popup-формы редактирования информации профиля
-function handleProfileButtonClik() {
-    popupProfile.classList.add('popup_opened');
+//Callback popup-элемента добавления 
+buttonAddElements.addEventListener('click', function() {
+    openModal(popupElements);
+});
+
+//Callback popup-элемента профиля
+profileButton.addEventListener('click', function() {
     popupProfileNameForm.value = profileName.textContent;
     popupProfileAboutForm.value = profileAbout.textContent;
+    openModal(popupProfile);
+});
+
+//Универсальная функция открытия popup-элементов
+function openModal(item){
+    item.classList.add('popup_opened')
 }
-const profileButton = document.querySelector('.profile__link');
-profileButton.addEventListener('click', function(){
-    handleProfileButtonClik()
- })
 
-//Открытие popu-формы для добавления нового элемента
-function openPopupAddElements() {
-    popupElements.classList.toggle('popup_opened');
+//Callback закрытия popup-элемента профиля
+profileButtonClose.addEventListener('click', function() {
+    closeModal(popupProfile);
+});
+
+//Callback закрытия popup-элемента добавления элементов
+buttonCloseAddElementsForm.addEventListener('click', function() {
+    closeModal(popupElements);
+});
+
+//Callback закрытия popup-элемента картинки
+popupImgCloseButton.addEventListener('click', function () {
+    closeModal(popupImag);
+});
+
+//Универсальная функция закрытия popup-элементов
+function closeModal(item){
+    item.classList.remove('popup_opened')
 }
-const buttonAddElements = document.querySelector('.profile__button');
-buttonAddElements.addEventListener('click', function(){
-    openPopupAddElements()
- })
-
-const profileButtonClose = document.querySelectorAll('.popup__close');
-const popupForms = document.querySelectorAll('.popup');
-
-profileButtonClose.forEach(function (item) {
-    item.addEventListener('click', function () {
-        profileButtonClose.forEach(function () {
-            popupForms.forEach(function(item) {
-                item.classList.remove('popup_opened');
-            })
-        })
-    })
-})
 
 // Функция присвоения значений профиля из popup-формы
 function formSubmitHandler(evt) {
@@ -72,18 +82,13 @@ function composeItem({ name, link }) {
     const imgElement = newElement.querySelector('.element__imag');
     imgElement.src = link;
     imgElement.alt = name;
-    imgElement.addEventListener('click', function () {
-        openPopupElementImg(popupImag)
+    //Callback popup картинки
+    imgElement.addEventListener('click', function () { 
+        openModal(popupImag);
         const popupImg = document.querySelector('.popup__pic');
         popupImg.src = link;
         popupImg.alt = name;
-    });
-    function openPopupElementImg(modal) {
-        modal.classList.add('popup_opened', 'popup_img');
         popupImagSubtitle.textContent = name;
-    }
-    popupImgCloseButton.addEventListener('click', function () {
-        closePopupElementImg(popupImag)
     });
 
     const removeButtonElement = newElement.querySelector('.element__trash');
@@ -115,13 +120,13 @@ popupElementsForm.addEventListener('submit', addNewElement)
 
 //Функция удаление элемента
 function removeElement(event) {
-    const targetElement = event.target.closest('.element').remove()
+    event.target.closest('.element').remove()
 }
 
-//Функция закрытия popup-элемента картинки
-function closePopupElementImg(modal) {
-    modal.classList.remove('popup_opened');
-}
+// //Функция закрытия popup-элемента картинки
+// function closePopupElementImg(modal) {
+//     modal.classList.remove('popup_opened');
+// }
 
 //Функция добавления лайков
 function likeActive(evt) {
