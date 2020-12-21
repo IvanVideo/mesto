@@ -3,19 +3,25 @@ const popupProfileNameForm = document.querySelector('.popup__input_profile_name'
 const popupProfileAboutForm = document.querySelector('.popup__input_profile_about');
 const profileName = document.querySelector('.profile__title');
 const profileAbout = document.querySelector('.profile__subtitle');
-const popupButtonExist = document.querySelector('.popup__button');
 const popupElements = document.querySelector('.popup-elements');
-const elementsContentCards = document.querySelector('.elements');
 const popupImgCloseButton = document.querySelector('.popup-img__close');
 const popupImag = document.querySelector('.popup-img');
-const addButton = document.querySelector('.popup-elements__button');
 const popupImagSubtitle = document.querySelector('.popup__subtitle');
-const popup = document.querySelector('.popup');
 const buttonAddElements = document.querySelector('.profile__button');
 const profileButton = document.querySelector('.profile__link');
 const profileButtonClose = document.querySelector('.popup__close');
-const popupForms = document.querySelectorAll('.popup');
 const buttonCloseAddElementsForm = document.querySelector('.popup-elements__close');
+const popupImg = document.querySelector('.popup__pic');
+
+//Универсальная функция закрытия popup-элементов
+function closeModal(item){
+    item.classList.remove('popup_opened')
+}
+
+//Универсальная функция открытия popup-элементов
+function openModal(item){
+    item.classList.add('popup_opened')
+}
 
 //Callback popup-элемента добавления 
 buttonAddElements.addEventListener('click', function() {
@@ -28,11 +34,6 @@ profileButton.addEventListener('click', function() {
     popupProfileAboutForm.value = profileAbout.textContent;
     openModal(popupProfile);
 });
-
-//Универсальная функция открытия popup-элементов
-function openModal(item){
-    item.classList.add('popup_opened')
-}
 
 //Callback закрытия popup-элемента профиля
 profileButtonClose.addEventListener('click', function() {
@@ -49,21 +50,16 @@ popupImgCloseButton.addEventListener('click', function () {
     closeModal(popupImag);
 });
 
-//Универсальная функция закрытия popup-элементов
-function closeModal(item){
-    item.classList.remove('popup_opened')
-}
-
 // Функция присвоения значений профиля из popup-формы
-function formSubmitHandler(evt) {
+function handleFormProfileSubmit(evt) {
     evt.preventDefault();
     profileName.textContent = popupProfileNameForm.value;
     profileAbout.textContent = popupProfileAboutForm.value;
-    popupProfile.classList.remove('popup_opened')
+    closeModal(popupProfile);
 }
 
 const popupProfileForm = popupProfile.querySelector('.popup__form_profile');
-popupProfileForm.addEventListener('submit', formSubmitHandler)
+popupProfileForm.addEventListener('submit', handleFormProfileSubmit)
 
 const conteinerElements = document.querySelector('.elements');
 const templateElement = document.querySelector('.template');
@@ -85,7 +81,6 @@ function composeItem({ name, link }) {
     //Callback popup картинки
     imgElement.addEventListener('click', function () { 
         openModal(popupImag);
-        const popupImg = document.querySelector('.popup__pic');
         popupImg.src = link;
         popupImg.alt = name;
         popupImagSubtitle.textContent = name;
@@ -111,7 +106,7 @@ function addNewElement() {
     conteinerElements.prepend(newItem);
     inputNamePopupAddElements.value = ''
     imgLinkElement.value = ''
-    popupElements.classList.remove('popup_opened')
+    closeModal(popupElements);
 }
 
 //Функция и колбэк кнопки добавления нового элемента
@@ -122,11 +117,6 @@ popupElementsForm.addEventListener('submit', addNewElement)
 function removeElement(event) {
     event.target.closest('.element').remove()
 }
-
-// //Функция закрытия popup-элемента картинки
-// function closePopupElementImg(modal) {
-//     modal.classList.remove('popup_opened');
-// }
 
 //Функция добавления лайков
 function likeActive(evt) {
