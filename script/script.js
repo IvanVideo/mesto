@@ -13,35 +13,144 @@ const profileButtonClose = document.querySelector('.popup__close');
 const buttonCloseAddElementsForm = document.querySelector('.popup-elements__close');
 const popupImg = document.querySelector('.popup__pic');
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const formProfile = document.querySelector('.popup__form_profile');
+
+
+function showError(from, input) {
+    const error = formProfile.querySelector(`#${input.id}-error`);
+    error.textContent = input.validationMessage;
+    input.classList.add('popup__input_invalid');
+}
+
+
+function hideError(from, input) {
+    const error = formProfile.querySelector(`#${input.id}-error`);
+    error.textContent = input.validationMessage;
+    input.classList.remove('popup__input_invalid');
+}
+
+function checkInputValidity(from, input) {
+    if (input.validity.valid) {
+        hideError(from, input);
+    } else {
+        showError(from, input);
+    }
+}
+
+
+function setButtonState(button, isActive) {
+    if (isActive) {
+        button.classList.remove('popup__button_invalid');
+        button.disabled = false;
+    } else {
+        button.classList.add('popup__button_invalid');
+        button.disabled = 'disabled';
+    }
+}
+
+
+
+
+
+
+function setEventListener(form) {
+    const inputList = form.querySelectorAll('.popup__input');
+    const submitButton = form.querySelector('.popup__button');
+
+    inputList.forEach(input => {
+        input.addEventListener('input', (evt) => {
+            checkInputValidity(form, input)
+            setButtonState(submitButton, formProfile.checkValidity())
+        })
+    })
+}
+
+function enableValidation () {
+    const forms = document.querySelectorAll('.popup__form');
+    forms.forEach(form => {
+        setEventListener(form)
+
+        const submitButton = form.querySelector('.popup__button');
+        setButtonState(submitButton, formProfile.checkValidity())
+    })
+}
+
+enableValidation ()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Универсальная функция закрытия popup-элементов
-function closeModal(item){
+function closeModal(item) {
     item.classList.remove('popup_opened')
 }
 
 //Универсальная функция открытия popup-элементов
-function openModal(item){
+function openModal(item) {
     item.classList.add('popup_opened')
 }
 
 //Callback popup-элемента добавления 
-buttonAddElements.addEventListener('click', function() {
+buttonAddElements.addEventListener('click', function () {
     openModal(popupElements);
 });
 
 //Callback popup-элемента профиля
-profileButton.addEventListener('click', function() {
+profileButton.addEventListener('click', function () {
     popupProfileNameForm.value = profileName.textContent;
     popupProfileAboutForm.value = profileAbout.textContent;
     openModal(popupProfile);
 });
 
 //Callback закрытия popup-элемента профиля
-profileButtonClose.addEventListener('click', function() {
+profileButtonClose.addEventListener('click', function () {
     closeModal(popupProfile);
 });
 
 //Callback закрытия popup-элемента добавления элементов
-buttonCloseAddElementsForm.addEventListener('click', function() {
+buttonCloseAddElementsForm.addEventListener('click', function () {
     closeModal(popupElements);
 });
 
@@ -79,7 +188,7 @@ function composeItem({ name, link }) {
     imgElement.src = link;
     imgElement.alt = name;
     //Callback popup картинки
-    imgElement.addEventListener('click', function () { 
+    imgElement.addEventListener('click', function () {
         openModal(popupImag);
         popupImg.src = link;
         popupImg.alt = name;
