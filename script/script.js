@@ -15,113 +15,6 @@ const popupImg = document.querySelector('.popup__pic');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const formProfile = document.querySelector('.popup__form_profile');
-
-
-function showError(from, input) {
-    const error = formProfile.querySelector(`#${input.id}-error`);
-    error.textContent = input.validationMessage;
-    input.classList.add('popup__input_invalid');
-}
-
-
-function hideError(from, input) {
-    const error = formProfile.querySelector(`#${input.id}-error`);
-    error.textContent = input.validationMessage;
-    input.classList.remove('popup__input_invalid');
-}
-
-function checkInputValidity(from, input) {
-    if (input.validity.valid) {
-        hideError(from, input);
-    } else {
-        showError(from, input);
-    }
-}
-
-
-function setButtonState(button, isActive) {
-    if (isActive) {
-        button.classList.remove('popup__button_invalid');
-        button.disabled = false;
-    } else {
-        button.classList.add('popup__button_invalid');
-        button.disabled = 'disabled';
-    }
-}
-
-
-
-
-
-
-function setEventListener(form) {
-    const inputList = form.querySelectorAll('.popup__input');
-    const submitButton = form.querySelector('.popup__button');
-
-    inputList.forEach(input => {
-        input.addEventListener('input', (evt) => {
-            checkInputValidity(form, input)
-            setButtonState(submitButton, formProfile.checkValidity())
-        })
-    })
-}
-
-function enableValidation () {
-    const forms = document.querySelectorAll('.popup__form');
-    forms.forEach(form => {
-        setEventListener(form)
-
-        const submitButton = form.querySelector('.popup__button');
-        setButtonState(submitButton, formProfile.checkValidity())
-    })
-}
-
-enableValidation ()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //Универсальная функция закрытия popup-элементов
 function closeModal(item) {
     item.classList.remove('popup_opened')
@@ -129,12 +22,15 @@ function closeModal(item) {
 
 //Универсальная функция открытия popup-элементов
 function openModal(item) {
-    item.classList.add('popup_opened')
+    item.classList.add('popup_opened');
 }
 
 //Callback popup-элемента добавления 
 buttonAddElements.addEventListener('click', function () {
     openModal(popupElements);
+    resetErrors();
+    resetInputErrors();
+    resetInput();
 });
 
 //Callback popup-элемента профиля
@@ -142,6 +38,8 @@ profileButton.addEventListener('click', function () {
     popupProfileNameForm.value = profileName.textContent;
     popupProfileAboutForm.value = profileAbout.textContent;
     openModal(popupProfile);
+    resetErrors();
+    resetInputErrors();
 });
 
 //Callback закрытия popup-элемента профиля

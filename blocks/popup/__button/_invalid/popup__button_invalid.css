@@ -1,4 +1,3 @@
 .popup__button_invalid {
-    color: red;
-    border: orange;
+ opacity: 0.2;
 }
