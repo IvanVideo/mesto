@@ -1,44 +1,6 @@
 const popupNode = document.querySelector('.popup');
 const formProfile = document.querySelector('.popup__form');
 
-//Функции закрытия popup-элементов по клику на overlay
-document.addEventListener('click', (evt) => {
-    if(evt.target.classList.contains('popup')) {
-        closeModal(popupProfile)
-    }
-})
-
-document.addEventListener('click', (evt) => {
-    if(evt.target.classList.contains('popup')) {
-        closeModal(popupImag)
-    }
-})
-
-document.addEventListener('click', (evt) => {
-    if(evt.target.classList.contains('popup')) {
-        closeModal(popupElements)
-    }
-})
-
-//Функции закрытия popup-элементов по нажатию на клавишу Esc
-document.addEventListener('keydown', (evt) => {
-    if(evt.key === 'Escape') {
-        closeModal(popupProfile)
-    }
-})
-
-document.addEventListener('keydown', (evt) => {
-    if(evt.key === 'Escape') {
-        closeModal(popupImag)
-    }
-})
-
-document.addEventListener('keydown', (evt) => {
-    if(evt.key === 'Escape') {
-        closeModal(popupElements)
-    }
-})
-
 //Функция очищения значения input
 function resetInput() {
     const inputList = document.querySelectorAll('.popup__input');
@@ -53,10 +15,6 @@ function resetErrors() {
     errors.forEach(item => {
         item.textContent = ''
     })
-}
-
-//ФУнкция удаления ошибки
-function resetInputErrors() {
     const inputs = document.querySelectorAll('.popup__input');
     inputs.forEach(item => {
         item.classList.remove('popup__input_invalid')
@@ -93,10 +51,9 @@ function setButtonState(button, isActive) {
         button.disabled = false;
     } else {
         button.classList.add('popup__button_invalid');
-        button.disabled = 'disabled';
+        button.disabled = true;
     }
 }
-
 
 //Функции проверки форм на валидность
 function setEventListener(form) {

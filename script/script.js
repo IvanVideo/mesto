@@ -12,50 +12,31 @@ const profileButton = document.querySelector('.profile__link');
 const profileButtonClose = document.querySelector('.popup__close');
 const buttonCloseAddElementsForm = document.querySelector('.popup-elements__close');
 const popupImg = document.querySelector('.popup__pic');
+const conteinerElements = document.querySelector('.elements');
+const templateElement = document.querySelector('.template');
+const inputNamePopupAddElements = document.querySelector('.popup__input_elements_name');
+const imgLinkElement = document.querySelector('.popup__input_elements_url');
+const popupProfileForm = popupProfile.querySelector('.popup__form_profile');
+const buttonCreate = document.querySelector('.popup-elements__button');
 
-
-
-//Универсальная функция закрытия popup-элементов
-function closeModal(item) {
-    item.classList.remove('popup_opened')
+//Функции закрытия popup-элементов по клику на overlay
+function closePopupByOverlay(evt) {
+    if (evt.target.classList.contains('popup')) {
+        const popupNode = document.querySelectorAll('.popup');
+        popupNode.forEach(item => {
+            closeModal(item)
+        })
+    }
 }
-
-//Универсальная функция открытия popup-элементов
-function openModal(item) {
-    item.classList.add('popup_opened');
+//Функции закрытия popup-элементов по нажатию на клавишу Esc
+function closePopupByEsc(evt) {
+    if (evt.key === 'Escape') {
+        const popupNode = document.querySelectorAll('.popup');
+        popupNode.forEach(item => {
+            closeModal(item)
+        })
+    }
 }
-
-//Callback popup-элемента добавления 
-buttonAddElements.addEventListener('click', function () {
-    openModal(popupElements);
-    resetErrors();
-    resetInputErrors();
-    resetInput();
-});
-
-//Callback popup-элемента профиля
-profileButton.addEventListener('click', function () {
-    popupProfileNameForm.value = profileName.textContent;
-    popupProfileAboutForm.value = profileAbout.textContent;
-    openModal(popupProfile);
-    resetErrors();
-    resetInputErrors();
-});
-
-//Callback закрытия popup-элемента профиля
-profileButtonClose.addEventListener('click', function () {
-    closeModal(popupProfile);
-});
-
-//Callback закрытия popup-элемента добавления элементов
-buttonCloseAddElementsForm.addEventListener('click', function () {
-    closeModal(popupElements);
-});
-
-//Callback закрытия popup-элемента картинки
-popupImgCloseButton.addEventListener('click', function () {
-    closeModal(popupImag);
-});
 
 // Функция присвоения значений профиля из popup-формы
 function handleFormProfileSubmit(evt) {
@@ -65,18 +46,18 @@ function handleFormProfileSubmit(evt) {
     closeModal(popupProfile);
 }
 
-const popupProfileForm = popupProfile.querySelector('.popup__form_profile');
-popupProfileForm.addEventListener('submit', handleFormProfileSubmit)
+//Универсальная функция закрытия popup-элементов
+function closeModal(item) {
+    item.classList.remove('popup_opened');
+    document.removeEventListener('click', closePopupByOverlay);
+    document.addEventListener('keydown', closePopupByEsc);
+}
 
-const conteinerElements = document.querySelector('.elements');
-const templateElement = document.querySelector('.template');
-const inputNamePopupAddElements = document.querySelector('.popup__input_elements_name');
-const imgLinkElement = document.querySelector('.popup__input_elements_url');
-
-//Рендер элементов галереи 
-function renderElements() {
-    const elementsArray = initialCards.map(composeItem);
-    conteinerElements.append(...elementsArray);
+//Универсальная функция открытия popup-элементов
+function openModal(item) {
+    item.classList.add('popup_opened');
+    document.addEventListener('click', closePopupByOverlay);
+    document.addEventListener('keydown', closePopupByEsc);
 }
 
 function composeItem({ name, link }) {
@@ -113,6 +94,8 @@ function addNewElement() {
     conteinerElements.prepend(newItem);
     inputNamePopupAddElements.value = ''
     imgLinkElement.value = ''
+    buttonCreate.classList.add('popup__button_invalid');
+    buttonCreate.disabled = true;
     closeModal(popupElements);
 }
 
@@ -127,8 +110,46 @@ function removeElement(event) {
 
 //Функция добавления лайков
 function likeActive(evt) {
-    const picLike = evt.target;
-    picLike.classList.toggle('element__heart-like_active')
+    evt.target.classList.toggle('element__heart-like_active')
 }
+
+//Рендер элементов галереи 
+function renderElements() {
+    const elementsArray = initialCards.map(composeItem);
+    conteinerElements.append(...elementsArray);
+}
+
+//Callback popup-элемента добавления 
+buttonAddElements.addEventListener('click', function () {
+    openModal(popupElements);
+    resetErrors();
+    resetInput();
+});
+
+//Callback popup-элемента профиля
+profileButton.addEventListener('click', function () {
+    popupProfileNameForm.value = profileName.textContent;
+    popupProfileAboutForm.value = profileAbout.textContent;
+    openModal(popupProfile);
+    resetErrors();
+});
+
+//Callback закрытия popup-элемента профиля
+profileButtonClose.addEventListener('click', function () {
+    closeModal(popupProfile);
+});
+
+//Callback закрытия popup-элемента добавления элементов
+buttonCloseAddElementsForm.addEventListener('click', function () {
+    closeModal(popupElements);
+});
+
+//Callback закрытия popup-элемента картинки
+popupImgCloseButton.addEventListener('click', function () {
+    closeModal(popupImag);
+});
+
+//Callback функции присвоения значений профиля из формы профиля
+popupProfileForm.addEventListener('submit', handleFormProfileSubmit)
 
 renderElements();
