@@ -22,60 +22,68 @@ function resetErrors() {
 }
 
 //Функция вывода ошибки валидации
-function showError(from, input) {
+function showError(from, input, config) {
     const error = document.querySelector(`#${input.id}-error`);
     error.textContent = input.validationMessage;
-    input.classList.add('popup__input_invalid');
+    input.classList.add(config.inputErrorClass);
 }
 
 //Функция скрытия ошибки валидации
-function hideError(from, input) {
+function hideError(from, input, config) {
     const error = document.querySelector(`#${input.id}-error`);
     error.textContent = input.validationMessage;
-    input.classList.remove('popup__input_invalid');
+    input.classList.remove(config.inputErrorClass);
 }
 
 //Функция проверки полей на валидацию
-function checkInputValidity(from, input) {
+function checkInputValidity(from, input, config) {
     if (input.validity.valid) {
-        hideError(from, input);
+        hideError(from, input, config);
     } else {
-        showError(from, input);
+        showError(from, input, config);
     }
 }
 
 //Функция отображения кнопки после валидации
-function setButtonState(button, isActive) {
+function setButtonState(button, isActive, config) {
     if (isActive) {
-        button.classList.remove('popup__button_invalid');
+        button.classList.remove(config.inactiveButtonClass);
         button.disabled = false;
     } else {
-        button.classList.add('popup__button_invalid');
+        button.classList.add(config.inactiveButtonClass);
         button.disabled = true;
     }
 }
 
 //Функции проверки форм на валидность
-function setEventListener(form) {
-    const inputList = form.querySelectorAll('.popup__input');
-    const submitButton = form.querySelector('.popup__button');
+function setEventListener(form, config) {
+    const inputList = form.querySelectorAll(config.inputSelector);
+    const submitButton = form.querySelector(config.submitButtonSelector);
 
     inputList.forEach(input => {
         input.addEventListener('input', (evt) => {
-            checkInputValidity(form, input)
-            setButtonState(submitButton, form.checkValidity())
+            checkInputValidity(form, input, config)
+            setButtonState(submitButton, form.checkValidity(), config)
         })
     })
 }
 
-function enableValidation () {
-    const forms = document.querySelectorAll('.popup__form');
+function enableValidation(config) {
+    const forms = document.querySelectorAll(config.formSelector);
     forms.forEach(form => {
-        setEventListener(form);
+        setEventListener(form, config);
 
-        const submitButton = form.querySelector('.popup__button');
-        setButtonState(submitButton, formProfile.checkValidity())
+        const submitButton = form.querySelector(config.submitButtonSelector);
+        setButtonState(submitButton, formProfile.checkValidity(), config)
     })
 }
+const validationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_invalid',
+    inputErrorClass: 'popup__input_invalid',
+    errorClass: 'error'
+};
+enableValidation(validationConfig)
 
-enableValidation ()
