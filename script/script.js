@@ -22,19 +22,16 @@ const buttonCreate = document.querySelector('.popup-elements__button');
 //Функции закрытия popup-элементов по клику на overlay
 function closePopupByOverlay(evt) {
     if (evt.target.classList.contains('popup')) {
-        const popupNode = document.querySelectorAll('.popup');
-        popupNode.forEach(item => {
-            closeModal(item)
-        })
-    }
+            closeModal(evt.target)
+     }
+
 }
-//Функции закрытия popup-элементов по нажатию на клавишу Esc
+
+// //Функции закрытия popup-элементов по нажатию на клавишу Esc
 function closePopupByEsc(evt) {
     if (evt.key === 'Escape') {
-        const popupNode = document.querySelectorAll('.popup');
-        popupNode.forEach(item => {
-            closeModal(item)
-        })
+        const activePopup = document.querySelector('.popup_opened');
+            closeModal(activePopup)
     }
 }
 
