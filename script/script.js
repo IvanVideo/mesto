@@ -1,6 +1,14 @@
 
 import Card from './Card.js';
 import { initialCards } from './initial-сards.js';
+import FormValidator from './FormValidator.js'
+
+
+
+
+
+
+
 
 const cardList = document.querySelector('.elements');
 const popupImg = document.querySelector('.popup-img');
@@ -23,8 +31,8 @@ function showPopup(link, name) {
 
 
 
-
-
+const input = document.querySelectorAll('.popup__input');
+const error = document.querySelectorAll('.error');
 const popupProfile = document.querySelector('.popup_profile');
 const popupProfileNameForm = document.querySelector('.popup__input_profile_name');
 const popupProfileAboutForm = document.querySelector('.popup__input_profile_about');
@@ -120,6 +128,18 @@ function addNewElement() {
 //Функция и колбэк кнопки добавления нового элемента
 const popupElementsForm = popupElements.querySelector('.popup__form_elements');
 popupElementsForm.addEventListener('submit', addNewElement)
+
+function resetErrors() {
+    error.forEach(item => {
+        item.textContent = '';
+    });
+}
+
+function resetInput() {
+    input.forEach(item => {
+        item.textContent = item.value;
+    });
+}
 
 //Callback popup-элемента добавления 
 buttonAddElements.addEventListener('click', function () {
