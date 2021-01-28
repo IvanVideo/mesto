@@ -1,8 +1,13 @@
 
 import Card from './Card.js';
 import { initialCards } from './initial-сards.js';
-import FormValidator from './FormValidator.js'
+import FormValidator from './FormValidator.js';
+import { validationConfig } from './FormValidator.js';
 
+
+const profileForm = document.querySelector('.popup__form_profile');
+const form = new FormValidator(validationConfig, profileForm);
+// form.enableValidation();
 
 
 
@@ -11,8 +16,7 @@ import FormValidator from './FormValidator.js'
 
 
 const cardList = document.querySelector('.elements');
-const popupImg = document.querySelector('.popup-img');
-const popupElements = document.querySelector('.popup-elements');
+
 
 initialCards.forEach((initialCards) => {
     const card = new Card(initialCards, '.elements', showPopup).render();
@@ -28,9 +32,8 @@ function showPopup(link, name) {
 
 
 
-
-
-
+const popupImg = document.querySelector('.popup-img');
+const popupElements = document.querySelector('.popup-elements');
 const input = document.querySelectorAll('.popup__input');
 const error = document.querySelectorAll('.error');
 const popupProfile = document.querySelector('.popup_profile');
@@ -55,15 +58,15 @@ const buttonCreate = document.querySelector('.popup-elements__button');
 //Функции закрытия popup-элементов по клику на overlay
 function closePopupByOverlay(evt) {
     if (evt.target.classList.contains('popup')) {
-            closeModal(evt.target)
-     }
+        closeModal(evt.target)
+    }
 }
 
 // //Функции закрытия popup-элементов по нажатию на клавишу Esc
 function closePopupByEsc(evt) {
     if (evt.key === 'Escape') {
         const activePopup = document.querySelector('.popup_opened');
-            closeModal(activePopup)
+        closeModal(activePopup)
     }
 }
 
@@ -87,6 +90,7 @@ function openModal(item) {
     item.classList.add('popup_opened');
     document.addEventListener('click', closePopupByOverlay);
     document.addEventListener('keydown', closePopupByEsc);
+    form.enableValidation();
 }
 
 function composeItem({ name, link }) {

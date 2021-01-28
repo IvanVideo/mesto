@@ -1,96 +1,199 @@
-const validationConfig = {
+export const validationConfig = {
+    formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__button',
     inactiveButtonClass: 'popup__button_invalid',
     inputErrorClass: 'popup__input_invalid',
-    errorClass: 'error'
 };
 
-const popupNode = document.querySelector('.popup');
-const formProfile = document.querySelector('.popup__form');
-
 export default class FormValidator {
-    constructor(config, formSelector) {
+    constructor(config, formElement) {
         this._config = config;
-        this._formSelector = formSelector;
+        this._form = formElement;
+        this._button = formElement.querySelector(config.submitButtonSelector);
     }
-
-    //Функция очищения значения input
-    resetInput() {
-        const inputList = document.querySelectorAll('.popup__input');
-        inputList.forEach(item => {
-            item.value = ''
-        })
-    }
-
-    //Функция удаления ошибки
-    resetErrors() {
-        const errors = document.querySelectorAll('.error');
-        errors.forEach(item => {
-            item.textContent = ''
-        })
-        const inputs = document.querySelectorAll('.popup__input');
-        inputs.forEach(item => {
-            item.classList.remove('popup__input_invalid')
-        })
-    }
-
-    //Функция вывода ошибки валидации
-    showError(from, input) {
-        const error = form.querySelector(`#${input.id}-error`);
+    // функция показывает ошибку
+    _showError(input) {
+        const error = this._form.querySelector(`#${input.id}-error`);
         error.textContent = input.validationMessage;
         input.classList.add(this._config.inputErrorClass);
     }
-
-//Функция скрытия ошибки валидации
-hideError(from, input, config) {
-    const error = document.querySelector(`#${input.id}-error`);
-    error.textContent = input.validationMessage;
-    input.classList.remove(config.inputErrorClass);
-}
-
-//Функция проверки полей на валидацию
-checkInputValidity(from, input, config) {
-    if (input.validity.valid) {
-        hideError(from, input, config);
-    } else {
-        showError(from, input, config);
+    // функция скрывает ошибку при ее устранении
+    _hideError(input) {
+        const error = this._form.querySelector(`#${input.id}-error`);
+        error.textContent = '';
+        input.classList.remove(this._config.inputErrorClass);
     }
-}
 
-//Функция отображения кнопки после валидации
-setButtonState(button, isActive) {
-    if (isActive) {
-        button.classList.remove(this._config.inactiveButtonClass);
-        button.disabled = false;
-    } else {
-        button.classList.add(this._config.inactiveButtonClass);
-        button.disabled = true;
+    // функция проверки формы на валидность
+    _checkInputValidity(input) {
+        if (input.validity.valid) {
+            hideError(input);
+        } else {
+            showError(input);
+        }
     }
+
+    // функция добавления доп.класса кнопке при невалидной форме
+    _setButtonState(isActive) {
+        if (isActive) {
+            this._button.classList.remove(this._config.inactiveButtonClass);
+            this._button.disabled = false;
+        } else {
+            this._button.classList.add(this._config.inactiveButtonClass);
+            this._button.disabled = true;
+        }
+    }
+
+    // функция, которой можно передать любую форму для валидации 
+    _setEventListener() {
+        const inputList = this._form.querySelectorAll(this._config.inputSelector);
+        // const submitButton = this._form.querySelector(this._config.submitButtonSelector);
+
+        inputList.forEach(input => {
+            input.addEventListener('input', (evt) => {
+                checkInputValidity(form, input);
+                setButtonState(this._form.checkValidity())
+            })
+        });
+    }
+
+    // функция, которая будет находить все формы на странице по конкретному селектору и для каждой из этих форм вызывать setEventListener
+    enableValidation(config) {
+            setEventListener()
+
+
+            this._form.addEventListener('submit', (evt) => {
+                evt.preventDefault();
+            });
+
+            setButtonState(this._form.checkValidity())
+
+    }
+
+
 }
 
-//Функции проверки форм на валидность
-setEventListener(form, config) {
-    const inputList = form.querySelectorAll(config.inputSelector);
-    const submitButton = form.querySelector(config.submitButtonSelector);
+// enableValidation(validationConfig);
 
-    inputList.forEach(input => {
-        input.addEventListener('input', (evt) => {
-            checkInputValidity(form, input, config)
-            setButtonState(submitButton, form.checkValidity(), config)
-        })
-    })
-}
 
-enableValidation() {
-    const form = document.querySelectorAll(this._formSelector);
-    setEventListener(form, this._config);
 
-    const submitButton = form.querySelector(config.submitButtonSelector);
-    setButtonState(submitButton, formProfile.checkValidity());
-}
-}
-const FormValidatorAdd = new FormValidator(validationConfig, '.popup__form');
-FormValidatorAdd.setButtonState();
 
-enableValidation(validationConfig);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// enableValidation({
+//     formSelector: '.popup__form',
+//     inputSelector: '.popup__input',
+//     submitButtonSelector: '.popup__button',
+//     inactiveButtonClass: 'popup__button_invalid',
+//     inputErrorClass: 'popup__input_invalid',
+// });
+
+
+
+
+// // функция показывает ошибку
+// function showError(form, input, config) {
+//     const error = form.querySelector(`#${input.id}-error`);
+//     error.textContent = input.validationMessage;
+//     input.classList.add(config.inputErrorClass);
+// }
+// // функция скрывает ошибку при ее устранении
+// function hideError(form, input, config) {
+//     const error = form.querySelector(`#${input.id}-error`);
+//     error.textContent = '';
+//     input.classList.remove(config.inputErrorClass);
+// }
+
+// // функция проверки формы на валидность
+// function checkInputValidity(form, input, config) {
+//     if (input.validity.valid) {
+//         hideError(form, input, config);
+//     } else {
+//         showError(form, input, config);
+//     }
+// }
+
+// // функция добавления доп.класса кнопке при невалидной форме
+// function setButtonState(button, isActive, config) {
+//     if (isActive) {
+//         button.classList.remove(config.inactiveButtonClass);
+//         button.disabled = false;
+//     } else {
+//         button.classList.add(config.inactiveButtonClass);
+//         button.disabled = true;
+//     }
+// }
+
+// // функция, которой можно передать любую форму для валидации 
+// function setEventListener(form, config) {
+//     const inputList = form.querySelectorAll(config.inputSelector);
+//     const submitButton = form.querySelector(config.submitButtonSelector);
+
+//     inputList.forEach(input => {
+//         input.addEventListener('input', (evt) => {
+//             checkInputValidity(form, input, config);
+//             setButtonState(submitButton, form.checkValidity(), config)
+//         })
+//     });
+// }
+
+// // функция, которая будет находить все формы на странице по конкретному селектору и для каждой из этих форм вызывать setEventListener
+// function enableValidation(config) {
+//     const forms = document.querySelectorAll(config.formSelector);
+//     forms.forEach(form => {
+//         setEventListener(form, config)
+
+
+//         form.addEventListener('submit', (evt) => {
+//             evt.preventDefault();
+//         });
+
+//         const submitButton = form.querySelector(config.submitButtonSelector);
+//         setButtonState(submitButton, form.checkValidity(), config)
+//     });
+// }
+
+
+
+
+
+
+
+// enableValidation(enableValidation);
+
