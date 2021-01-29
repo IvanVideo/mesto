@@ -5,9 +5,16 @@ import FormValidator from './FormValidator.js';
 import { validationConfig } from './FormValidator.js';
 
 
+
+
 const profileForm = document.querySelector('.popup__form_profile');
-const form = new FormValidator(validationConfig, profileForm);
-// form.enableValidation();
+const elementsForm = document.querySelector('.popup__form_elements');
+
+const formProfile = new FormValidator(validationConfig, profileForm);
+formProfile.enableValidation();
+// elementsForm.enableValidation();
+
+
 
 
 
@@ -90,7 +97,6 @@ function openModal(item) {
     item.classList.add('popup_opened');
     document.addEventListener('click', closePopupByOverlay);
     document.addEventListener('keydown', closePopupByEsc);
-    form.enableValidation();
 }
 
 function composeItem({ name, link }) {
@@ -99,6 +105,7 @@ function composeItem({ name, link }) {
     const imgElement = newElement.querySelector('.element__imag');
     imgElement.src = link;
     imgElement.alt = name;
+
     //Callback popup картинки
     imgElement.addEventListener('click', function () {
         openModal(popupImag);
