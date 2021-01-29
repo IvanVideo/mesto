@@ -11,14 +11,9 @@ const profileForm = document.querySelector('.popup__form_profile');
 const elementsForm = document.querySelector('.popup__form_elements');
 
 const formProfile = new FormValidator(validationConfig, profileForm);
+const formElements = new FormValidator(validationConfig, elementsForm);
 formProfile.enableValidation();
-// elementsForm.enableValidation();
-
-
-
-
-
-
+formElements.enableValidation();
 
 
 
