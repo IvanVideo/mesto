@@ -8,7 +8,7 @@ export default class Card {
     }
     _getTemplate() {
         const productElement = document
-        .querySelector('.template')
+        .querySelector(this._templateSelector)
         .content
         .querySelector('.element')
         .cloneNode(true);
@@ -49,5 +49,6 @@ export default class Card {
     _removeElement() {
 
         this._element.closest('.element').remove();
+        this._element = null;
     }
 }

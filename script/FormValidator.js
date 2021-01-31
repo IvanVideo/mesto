@@ -11,6 +11,8 @@ export default class FormValidator {
         this._config = config;
         this._form = formElement;
         this._button = formElement.querySelector(config.submitButtonSelector);
+        this._input = formElement.querySelectorAll(config.inputSelector);
+        this._error = formElement.querySelectorAll('.error');
     }
     // функция показывает ошибку
     _showError(input) {
@@ -70,4 +72,17 @@ export default class FormValidator {
         this._setButtonState(this._form.checkValidity())
 
     }
+
+    resetErrors() {
+        this._error.forEach(item => {
+            item.textContent = '';
+        });
+    }
+
+    resetInput() {
+        this._input.forEach(item => {
+            item.textContent = item.value;
+        });
+    }
 }
+

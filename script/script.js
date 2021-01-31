@@ -17,23 +17,24 @@ formElements.enableValidation();
 
 
 
+
 const cardList = document.querySelector('.elements');
 
 
 initialCards.forEach((initialCards) => {
-    const card = new Card(initialCards, '.elements', showPopup).render();
+    const card = new Card(initialCards, '.template', showPopup).render();
     cardList.append(card);
 });
 
 function showPopup(link, name) {
-    popupImg.classList.add('popup_opened');
-    document.querySelector('.popup__pic').src = link;
-    document.querySelector('.popup__pic').value = name;
+    openModal(popupImg);
+    popupPic.src = link;
+    popupPic.value = name;
     document.querySelector('.popup__subtitle').textContent = name;
+
 }
 
-
-
+const popupPic = document.querySelector('.popup__pic');
 const popupImg = document.querySelector('.popup-img');
 const popupElements = document.querySelector('.popup-elements');
 const input = document.querySelectorAll('.popup__input');
@@ -94,30 +95,6 @@ function openModal(item) {
     document.addEventListener('keydown', closePopupByEsc);
 }
 
-function composeItem({ name, link }) {
-    const newElement = templateElement.content.cloneNode(true);
-
-    const imgElement = newElement.querySelector('.element__imag');
-    imgElement.src = link;
-    imgElement.alt = name;
-
-    //Callback popup картинки
-    imgElement.addEventListener('click', function () {
-        openModal(popupImag);
-        popupImg.src = link;
-        popupImg.alt = name;
-        popupImagSubtitle.textContent = name;
-    });
-
-    const buttonLike = newElement.querySelector('.element__heart-like');
-    buttonLike.addEventListener('click', likeActive);
-
-    const nameElement = newElement.querySelector('.element__title');
-    nameElement.textContent = name;
-
-    return newElement;
-}
-
 //Функция добавления новой карточки
 function addNewElement() {
     const nameCard = inputNamePopupAddElements.value;
@@ -135,23 +112,17 @@ function addNewElement() {
 const popupElementsForm = popupElements.querySelector('.popup__form_elements');
 popupElementsForm.addEventListener('submit', addNewElement)
 
-function resetErrors() {
-    error.forEach(item => {
-        item.textContent = '';
-    });
-}
-
-function resetInput() {
-    input.forEach(item => {
-        item.textContent = item.value;
-    });
-}
+// function resetInput() {
+//     input.forEach(item => {
+//         item.textContent = item.value;
+//     });
+// }
 
 //Callback popup-элемента добавления 
 buttonAddElements.addEventListener('click', function () {
     openModal(popupElements);
-    resetErrors();
-    resetInput();
+    formElements.resetErrors();
+    formElements.resetInput();
 });
 
 //Callback popup-элемента профиля
@@ -159,7 +130,8 @@ profileButton.addEventListener('click', function () {
     popupProfileNameForm.value = profileName.textContent;
     popupProfileAboutForm.value = profileAbout.textContent;
     openModal(popupProfile);
-    resetErrors();
+    formProfile.resetErrors();
+    // formProfile.resetInput();
 });
 
 //Callback закрытия popup-элемента профиля
