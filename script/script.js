@@ -4,9 +4,6 @@ import { initialCards } from './initial-сards.js';
 import FormValidator from './FormValidator.js';
 import { validationConfig } from './FormValidator.js';
 
-
-
-
 const profileForm = document.querySelector('.popup__form_profile');
 const elementsForm = document.querySelector('.popup__form_elements');
 
@@ -14,8 +11,6 @@ const formProfile = new FormValidator(validationConfig, profileForm);
 const formElements = new FormValidator(validationConfig, elementsForm);
 formProfile.enableValidation();
 formElements.enableValidation();
-
-
 
 
 const cardList = document.querySelector('.elements');
@@ -26,19 +21,9 @@ initialCards.forEach((initialCards) => {
     cardList.append(card);
 });
 
-function showPopup(link, name) {
-    openModal(popupImg);
-    popupPic.src = link;
-    popupPic.value = name;
-    document.querySelector('.popup__subtitle').textContent = name;
-
-}
-
 const popupPic = document.querySelector('.popup__pic');
 const popupImg = document.querySelector('.popup-img');
 const popupElements = document.querySelector('.popup-elements');
-const input = document.querySelectorAll('.popup__input');
-const error = document.querySelectorAll('.error');
 const popupProfile = document.querySelector('.popup_profile');
 const popupProfileNameForm = document.querySelector('.popup__input_profile_name');
 const popupProfileAboutForm = document.querySelector('.popup__input_profile_about');
@@ -46,17 +31,23 @@ const profileName = document.querySelector('.profile__title');
 const profileAbout = document.querySelector('.profile__subtitle');
 const popupImgCloseButton = document.querySelector('.popup-img__close');
 const popupImag = document.querySelector('.popup-img');
-const popupImagSubtitle = document.querySelector('.popup__subtitle');
 const buttonAddElements = document.querySelector('.profile__button');
 const profileButton = document.querySelector('.profile__link');
 const profileButtonClose = document.querySelector('.popup__close');
 const buttonCloseAddElementsForm = document.querySelector('.popup-elements__close');
 const conteinerElements = document.querySelector('.elements');
-const templateElement = document.querySelector('.template');
 const inputNamePopupAddElements = document.querySelector('.popup__input_elements_name');
 const imgLinkElement = document.querySelector('.popup__input_elements_url');
 const popupProfileForm = popupProfile.querySelector('.popup__form_profile');
 const buttonCreate = document.querySelector('.popup-elements__button');
+
+function showPopup(link, name) {
+    openModal(popupImg);
+    popupPic.src = link;
+    popupPic.value = name;
+    document.querySelector('.popup__subtitle').textContent = name;
+
+}
 
 //Функции закрытия popup-элементов по клику на overlay
 function closePopupByOverlay(evt) {
@@ -99,8 +90,9 @@ function openModal(item) {
 function addNewElement() {
     const nameCard = inputNamePopupAddElements.value;
     const linkImgCard = imgLinkElement.value;
-    const newItem = composeItem({ name: nameCard, link: linkImgCard });
-    conteinerElements.prepend(newItem);
+    const carData = ({ name: nameCard, link: linkImgCard });
+    const newCard = new Card(carData, '.template', showPopup).render();
+    conteinerElements.prepend(newCard);
     inputNamePopupAddElements.value = ''
     imgLinkElement.value = ''
     buttonCreate.classList.add('popup__button_invalid');
@@ -112,17 +104,13 @@ function addNewElement() {
 const popupElementsForm = popupElements.querySelector('.popup__form_elements');
 popupElementsForm.addEventListener('submit', addNewElement)
 
-// function resetInput() {
-//     input.forEach(item => {
-//         item.textContent = item.value;
-//     });
-// }
-
 //Callback popup-элемента добавления 
 buttonAddElements.addEventListener('click', function () {
+    inputNamePopupAddElements.value = inputNamePopupAddElements.alt;
+    imgLinkElement.value = imgLinkElement.alt;
     openModal(popupElements);
     formElements.resetErrors();
-    formElements.resetInput();
+    formElements.resetInputsError();
 });
 
 //Callback popup-элемента профиля
@@ -131,7 +119,7 @@ profileButton.addEventListener('click', function () {
     popupProfileAboutForm.value = profileAbout.textContent;
     openModal(popupProfile);
     formProfile.resetErrors();
-    // formProfile.resetInput();
+    formProfile.resetInputsError();
 });
 
 //Callback закрытия popup-элемента профиля

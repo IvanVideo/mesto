@@ -51,7 +51,6 @@ export default class FormValidator {
     _setEventListener() {
         const inputList = this._form.querySelectorAll(this._config.inputSelector);
 
-
         inputList.forEach(input => {
             input.addEventListener('input', (evt) => {
                 this._checkInputValidity(input);
@@ -62,7 +61,7 @@ export default class FormValidator {
 
     // функция, которая будет находить все формы на странице по конкретному селектору и для каждой из этих форм вызывать setEventListener
     enableValidation() {
-        this._setEventListener(this._config.formSelector);
+        this._setEventListener();
 
 
         this._form.addEventListener('submit', (evt) => {
@@ -72,16 +71,17 @@ export default class FormValidator {
         this._setButtonState(this._form.checkValidity())
 
     }
-
-    resetErrors() {
-        this._error.forEach(item => {
-            item.textContent = '';
+    // функция сброса ошшибки инпута
+    resetInputsError() {
+        this._input.forEach(item => {
+            item. classList.remove('popup__input_invalid')
         });
     }
 
-    resetInput() {
-        this._input.forEach(item => {
-            item.textContent = item.value;
+    // функция сброса ошибок
+    resetErrors() {
+        this._error.forEach(item => {
+            item.textContent = '';
         });
     }
 }
