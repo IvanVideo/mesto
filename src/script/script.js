@@ -4,6 +4,7 @@ import { initialCards } from './initial-сards.js';
 import FormValidator from './FormValidator.js';
 import { validationConfig } from './FormValidator.js';
 
+import '../pages/index.css';
 const profileForm = document.querySelector('.popup__form_profile');
 const elementsForm = document.querySelector('.popup__form_elements');
 

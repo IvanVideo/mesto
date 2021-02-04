@@ -5,17 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="body root">
     <header class="header header_position_content">
-        <img src="./images/Vector.png" alt="Логотип Место" class="logo logo_top-position">
+        <img src="<%=require('./images/Vector.png')%>" alt="Логотип Место" class="logo logo_top-position">
     </header>
     <main>
         <section class="profile profile_position_content">
             <div class="profile__main">
-                <img src="./images/image.png" alt="Жак-Ив Кусто" class="profile__image">
+                <img src="<%=require('./images/image.png')%>" alt="Жак-Ив Кусто" class="profile__image">
                 <div class="profile__content">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
                     <p class="profile__subtitle">Исследователь океана</p>
@@ -74,7 +73,7 @@
     <template class="template">
         <div class="element">
             <div class="element__block"><img src="#" alt="#" class="element__imag"></div>
-            <button class="element__trash" type="button"><img src="./images/Trash.svg" alt="Корзина"
+            <button class="element__trash" type="button"><img src="<%=require('./images/Trash.svg')%>" alt="Корзина"
                     class="element__pic"></button>
             <div class="element__content">
                 <h2 class="element__title"></h2>
@@ -82,7 +81,6 @@
             </div>
         </div>
     </template>
-    <script src="./script/script.js" type="module"></script>
 </body>
 
 </html>
