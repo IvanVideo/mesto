@@ -3,11 +3,11 @@ import Card from './Card.js';
 import { initialCards } from './initial-сards.js';
 import FormValidator from './FormValidator.js';
 import { validationConfig } from './FormValidator.js';
-
 import '../pages/index.css';
+import Popup from './Popup.js';
+
 const profileForm = document.querySelector('.popup__form_profile');
 const elementsForm = document.querySelector('.popup__form_elements');
-
 const formProfile = new FormValidator(validationConfig, profileForm);
 const formElements = new FormValidator(validationConfig, elementsForm);
 formProfile.enableValidation();
@@ -15,12 +15,14 @@ formElements.enableValidation();
 
 
 const cardList = document.querySelector('.elements');
-
-
 initialCards.forEach((initialCards) => {
     const card = new Card(initialCards, '.template', showPopup).render();
     cardList.append(card);
 });
+
+
+// const popup = document.querySelector('.popup');
+const popupAll = new Popup('.popup');
 
 const popupPic = document.querySelector('.popup__pic');
 const popupImg = document.querySelector('.popup-img');
@@ -115,13 +117,13 @@ buttonAddElements.addEventListener('click', function () {
 });
 
 //Callback popup-элемента профиля
-profileButton.addEventListener('click', function () {
-    popupProfileNameForm.value = profileName.textContent;
-    popupProfileAboutForm.value = profileAbout.textContent;
-    openModal(popupProfile);
-    formProfile.resetErrors();
-    formProfile.resetInputsError();
-});
+// profileButton.addEventListener('click', function () {
+//     popupProfileNameForm.value = profileName.textContent;
+//     popupProfileAboutForm.value = profileAbout.textContent;
+//     openModal(popupProfile);
+//     formProfile.resetErrors();
+//     formProfile.resetInputsError();
+// });
 
 //Callback закрытия popup-элемента профиля
 profileButtonClose.addEventListener('click', function () {

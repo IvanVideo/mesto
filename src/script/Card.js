@@ -28,7 +28,6 @@ export default class Card {
     }
 
     _setEventListeners() {
-
         this._element.querySelector('.element__heart-like').addEventListener('click', () => {
             this._likeActive();
         });
