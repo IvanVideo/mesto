@@ -1,5 +1,5 @@
 export default class Card {
-    constructor(initialCards, templateSelector, showPopup) {
+    constructor({initialCards, showPopup}, templateSelector) {
         this._initialCards = initialCards;
         this._templateSelector = templateSelector;
         this._link = initialCards.link;

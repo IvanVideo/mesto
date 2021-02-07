@@ -3,6 +3,7 @@ import Card from './Card.js';
 import { initialCards } from './initial-сards.js';
 import FormValidator from './FormValidator.js';
 import { validationConfig } from './FormValidator.js';
+import Section from './Section.js';
 
 import '../pages/index.css';
 const profileForm = document.querySelector('.popup__form_profile');
@@ -14,13 +15,32 @@ formProfile.enableValidation();
 formElements.enableValidation();
 
 
+function renderItems(item) {
+    const newElement = new Card({
+        items: item,
+        showPopup 
+    },
+    '.template').render();
+    initialCardElement.addItems(newElement);
+}
+
+
+const initialCardElement = new Section({
+    items: initialCards,
+     renderer: renderItems
+}, '.elements'
+);
+
+
+initialCardElement.renderElements();
+
+
+
 const cardList = document.querySelector('.elements');
-
-
-initialCards.forEach((initialCards) => {
-    const card = new Card(initialCards, '.template', showPopup).render();
-    cardList.append(card);
-});
+// initialCards.forEach((initialCards) => {
+//     const card = new Card(initialCards, '.template', showPopup).render();
+//     cardList.append(card);
+// });
 
 const popupPic = document.querySelector('.popup__pic');
 const popupImg = document.querySelector('.popup-img');
