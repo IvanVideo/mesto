@@ -1,12 +1,13 @@
 export default class Card {
-    constructor({initialCards, showPopup}, templateSelector) {
-        this._initialCards = initialCards;
+    constructor({data, showPopup}, templateSelector) {
+        this._data = data;
         this._templateSelector = templateSelector;
-        this._link = initialCards.link;
-        this._name = initialCards.name;
+        this._link = data.link;
+        this._name = data.name;
         this._showPopup = showPopup;
     }
     _getTemplate() {
+        console.log(this._templateSelector)
         const productElement = document
         .querySelector(this._templateSelector)
         .content
@@ -20,9 +21,9 @@ export default class Card {
         this._element = this._getTemplate();
         this._setEventListeners();
         
-        this._element.querySelector('.element__imag').src = this._initialCards.link;
-        this._element.querySelector('.element__title').textContent = this._initialCards.name;
-        this._element.querySelector('.element__pic').value = this._initialCards.name;
+        this._element.querySelector('.element__imag').src = this._data.link;
+        this._element.querySelector('.element__title').textContent = this._data.name;
+        this._element.querySelector('.element__pic').value = this._data.name;
 
         return this._element;
     }
