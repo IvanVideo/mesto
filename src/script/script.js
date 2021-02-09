@@ -1,11 +1,17 @@
 
+import '../pages/index.css';
 import Card from './Card.js';
 import { initialCards } from './initial-сards.js';
 import FormValidator from './FormValidator.js';
 import { validationConfig } from './FormValidator.js';
 import Section from './Section.js';
+// import Popup from './Popup.js';
+// import PopupWithForm from './PopupWithForm';
+// import PopupWithImage from './PopupWithImage';
+// import UserInfo from './UserInfo';
 
-import '../pages/index.css';
+
+
 const profileForm = document.querySelector('.popup__form_profile');
 const elementsForm = document.querySelector('.popup__form_elements');
 
@@ -36,11 +42,12 @@ initialCardElement.renderElements();
 
 
 
-const cardList = document.querySelector('.elements');
+// const cardList = document.querySelector('.elements');
 // initialCards.forEach((initialCards) => {
 //     const card = new Card(initialCards, '.template', showPopup).render();
 //     cardList.append(card);
 // });
+
 
 const popupPic = document.querySelector('.popup__pic');
 const popupImg = document.querySelector('.popup-img');
