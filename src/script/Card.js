@@ -7,7 +7,6 @@ export default class Card {
         this._showPopup = showPopup;
     }
     _getTemplate() {
-        console.log(this._templateSelector)
         const productElement = document
         .querySelector(this._templateSelector)
         .content
@@ -36,7 +35,7 @@ export default class Card {
             this._removeElement();
         });
         this._element.querySelector('.element__imag').addEventListener('click', () => {
-            this._showPopup(this._link, this._name);
+            this._showPopup(this._name, this._link);
         });
     }
 
