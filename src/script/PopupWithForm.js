@@ -1,8 +1,9 @@
+import Popup from './Popup.js'
 export default class PopupWithForm extends Popup {
-    constructor(popupSelector, handleSubmitForm) {
+    constructor({ popupSelector, handleSubmitForm }) {
         super(popupSelector);
         this._handleSubmitForm = handleSubmitForm;
-        this._popupForm = this._popup.queryselector('.popup__form');
+        this._popupForm = this._popup.querySelector('.popup__form');
     }
 
     //собирает данные всех полей формы
@@ -19,13 +20,26 @@ export default class PopupWithForm extends Popup {
         return this._formValues;
     }
 
-    close() {
-
-    }
-
     setEventListeners() {
+        const editButtonProfile = document.querySelector('.profile__link');
+        const elementsAddButton = document.querySelector('.profile__button');
+        const popupCloseButton = this._popup.querySelector('.popup__close');
+
+        popupCloseButton.addEventListener('click', () => {
+            super.close();
+        });
+
+        editButtonProfile.addEventListener('click', () => {
+            super.open();
+        });
+
+        elementsAddButton.addEventListener('click', () => {
+            super.open();
+        });
+
         this._popupForm.addEventListener('submit', () => {
             handleSubmitForm(_getInputValues());
+            super.close();
         })
     }
 }

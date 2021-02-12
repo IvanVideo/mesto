@@ -5,26 +5,30 @@ export default class Popup {
 
     open() {
         this._popup.classList.add('popup_opened');
-        // document.addEventListener('click', closePopupByOverlay);
-        // document.addEventListener('keydown', closePopupByEsc);
-
+        document.addEventListener('keydown', this._handleEscClose.bind(this));
+        document.addEventListener('click', (evt) => {
+            if (evt.target.classList.contains('popup_opened')) {
+                this.close();
+            }
+        });
+        this.setEventListeners();
     }
 
     close() {
-        console.log('пока2')
-        // this._popup.classList.remove('popup_opened');
+        this._popup.classList.remove('popup_opened');
     }
 
-    _handleEscClose() {
-
-    }
+    _handleEscClose (evt) {
+        if (evt.key === 'Escape') {
+            this.close();
+        }
+    } 
 
     //добавляет слушатель клика на иконку закрытия попапа
     setEventListeners() {
-        console.log('привет')
         const popupImgCloseButton = this._popup.querySelector('.popup-img__close')
         popupImgCloseButton.addEventListener('click', () => {
-            close(this._popup);
+            this.close();
         });
     }
 }
