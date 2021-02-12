@@ -7,12 +7,26 @@ import { validationConfig } from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage';
 import PopupWithForm from './PopupWithForm';
-// import UserInfo from './UserInfo';
+import UserInfo from './UserInfo';
 
 
+// const nameProfile = document.querySelector('.popup__input_profile_name');
+// const aboutProfile = document.querySelector('.popup__input_profile_about');
+// const userInfo = new UserInfo(nameProfile, aboutProfil );
+// setUserInfo()
 
-const profileForm = document.querySelector('.popup__form_profile');
-const elementsForm = document.querySelector('.popup__form_elements');
+const buttonEditProfile = document.querySelector('.profile__link');
+buttonEditProfile.addEventListener('click', () => {
+    popupEditProfile.open();
+});
+
+
+const buttonAddElements = document.querySelector('.profile__button');
+buttonAddElements.addEventListener('click', () => {
+    popupAddElements.open();
+})
+
+
 
 
 function renderItems(item) {
@@ -40,13 +54,18 @@ const popupImage = new PopupWithImage('.popup-img');
 
 
 
-
 const popupEditProfile = new PopupWithForm({
     popupSelector: '.popup_profile',
     handleSubmitForm: (data) => {
         renderItems(data);
     }
 });
+
+// /////////////////////
+// const popupElementsForm = popupElements.querySelector('.popup__form_elements');
+// popupElementsForm.addEventListener('submit', addNewElement)
+// ////////////////////
+
 
 const popupAddElements = new PopupWithForm({
     popupSelector: '.popup-elements',
@@ -55,7 +74,10 @@ const popupAddElements = new PopupWithForm({
     }
 });
 
+// const formElement = document.querySelector('.popup__form')
+// const validForms = new FormValidator(cofig, formElement);
 
+// validForms.enableValidation();
 initialCardElement.renderElements();
 popupEditProfile.setEventListeners();
 popupAddElements.setEventListeners();
