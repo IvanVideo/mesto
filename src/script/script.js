@@ -5,21 +5,23 @@ import { initialCards } from './initial-сards.js';
 import FormValidator from './FormValidator.js';
 import { validationConfig } from './FormValidator.js';
 import Section from './Section.js';
-import PopupWithImage from './PopupWithImage';
-import PopupWithForm from './PopupWithForm';
-import UserInfo from './UserInfo';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 
-// const nameProfile = document.querySelector('.popup__input_profile_name');
-// const aboutProfile = document.querySelector('.popup__input_profile_about');
-// const userInfo = new UserInfo(nameProfile, aboutProfil );
-// setUserInfo()
+const nameProfile = document.querySelector('.profile__title');
+const aboutProfile = document.querySelector('.profile__subtitle');
+const userInfo = new UserInfo(nameProfile, aboutProfile);
+
 
 const buttonEditProfile = document.querySelector('.profile__link');
 buttonEditProfile.addEventListener('click', () => {
     popupEditProfile.open();
+    const inputName = document.querySelector('.popup__input_profile_name');
+    const inputAbout = document.querySelector('.popup__input_profile_about');
+    userInfo.getUserInfo(inputName, inputAbout);
 });
-
 
 const buttonAddElements = document.querySelector('.profile__button');
 buttonAddElements.addEventListener('click', () => {
@@ -27,6 +29,27 @@ buttonAddElements.addEventListener('click', () => {
 })
 
 
+// ////добавление одной карточки
+// const newElement = new PopupWithForm({
+//     popupSelector: '.popup-elements',
+//     handleSubmitForm: () => {
+//         newElement.render();
+//     }
+// })
+
+
+
+
+
+
+
+ const submitForm = new PopupWithForm({ 
+    popupSelector: '.popup_profile',
+    handleSubmitForm: () => {
+        userInfo.setUserInfo();
+    }
+ })
+ submitForm.setEventListeners();
 
 
 function renderItems(item) {

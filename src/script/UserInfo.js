@@ -1,36 +1,23 @@
-// export default class UserInfo {
-//     constructor({nameProfile, aboutProfile}) {
-//         this._nameProfile = nameProfile;
-//         this._aboutProfile = aboutProfile;
-//         this._popupForm = this._popup.querySelector('.popup__form');
-//         this._name = ;
-//         this._about = ;
-//     }
+export default class UserInfo {
+    constructor(nameProfile, aboutProfile) {
+        this._nameProfile = nameProfile;
+        this._aboutProfile = aboutProfile;
+        const popupForm = document.querySelector('.popup_profile');
+        this._name = popupForm.querySelector('.popup__input_profile_name');
+        this._about = popupForm.querySelector('.popup__input_profile_about');
+    }
 
-//     updateUserInfo = () => {
-//         this._nameElement.textContent = this._name;
-//         this._aboutElement.textContent = this._about;
-//     }
+    setUserInfo (name, about) {
+        console.log('ку-ку')
+        const nameProfile = document.querySelector('.profile__title');
+        const aboutProfile = document.querySelector('.profile__subtitle');
+        nameProfile.value = name;
+        aboutProfile.value = about;
+    }
 
-//     // возвращает объект с данными пользователя
-//     getUserInfo() {
-//         this._userInfoList = this._popupForm.querySelectorAll('.popup__input');
-//         this._inputsValues = {};
-
-//         this._userInfoList.forEach(input => {
-//             this._inputsValues[input.name] = input.value;
-
-//         });
-
-//         return {
-//             name: this._name,
-//             about: this._about,
-//         };
-//     }
-
-//     // принимает новые данные о пользователе и добавляет на страницу
-//     setUserInfo(newName, newAbout) {
-//         this._name = newName;
-//         this._about = newAbout;
-//     }
-// }
+    getUserInfo (name, about) {
+        name.value  = this._nameProfile.textContent;
+        about.value = this._aboutProfile.textContent;
+        return {name, about}
+    }
+}

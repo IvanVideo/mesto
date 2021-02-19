@@ -19,9 +19,23 @@ export default class PopupWithForm extends Popup {
 
     setEventListeners() {
         const popupCloseButton = this._popup.querySelector('.popup__close');
-
         popupCloseButton.addEventListener('click', () => {
             super.close();
         });
+
+
+        const popupProfileSubmitForm = this._popup.querySelector('.popup__form');
+        popupProfileSubmitForm.addEventListener('submit', () => {
+            console.log('asdas')
+            evt.preventDefault();
+            this._handleSubmitForm(this._getInputValues());
+            super.close();
+        });
+
+        // добавление новой карточки
+        // const addElementsButtonSubmit = this._popup.querySelector('.popup__form');
+        // addElementsButtonSubmit.addEventListener('submit', () => {
+        //     render()
+        // })
     }
 }

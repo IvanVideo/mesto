@@ -16,7 +16,6 @@ export default class Card {
     }
 
     render() {
-
         this._element = this._getTemplate();
         this._setEventListeners();
         
