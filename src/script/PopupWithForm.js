@@ -8,7 +8,7 @@ export default class PopupWithForm extends Popup {
 
     //собирает данные всех полей формы
     _getInputValues() {
-        this._inputList = this._popupForm.querySelectorAll('.form__input');
+        this._inputList = this._popupForm.querySelectorAll('.popup__input');
         this._formValues = {};
         this._inputList.forEach(input => {
             this._formValues[input.name] = input.value;
@@ -25,17 +25,16 @@ export default class PopupWithForm extends Popup {
 
 
         const popupProfileSubmitForm = this._popup.querySelector('.popup__form');
-        popupProfileSubmitForm.addEventListener('submit', () => {
-            console.log('asdas')
+        popupProfileSubmitForm.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._handleSubmitForm(this._getInputValues());
             super.close();
         });
 
-        // добавление новой карточки
-        // const addElementsButtonSubmit = this._popup.querySelector('.popup__form');
-        // addElementsButtonSubmit.addEventListener('submit', () => {
-        //     render()
-        // })
+        const addElementsButtonSubmit = this._popup.querySelector('.popup__form');
+        addElementsButtonSubmit.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            super.close();
+        })
     }
 }

@@ -5,7 +5,6 @@ export const validationConfig = {
     inactiveButtonClass: 'popup__button_invalid',
     inputErrorClass: 'popup__input_invalid',
 };
-
 export default class FormValidator {
     constructor(config, formElement) {
         this._config = config;
@@ -26,7 +25,6 @@ export default class FormValidator {
         error.textContent = '';
         input.classList.remove(this._config.inputErrorClass);
     }
-
     // функция проверки формы на валидность
     _checkInputValidity(input) {
         if (input.validity.valid) {
@@ -35,9 +33,8 @@ export default class FormValidator {
             this._showError(input);
         }
     }
-
     // функция добавления доп.класса кнопке при невалидной форме
-    _setButtonState(isActive) {
+    setButtonState(isActive) {
         if (isActive) {
             this._button.classList.remove(this._config.inactiveButtonClass);
             this._button.disabled = false;
@@ -46,7 +43,6 @@ export default class FormValidator {
             this._button.disabled = true;
         }
     }
-
     // функция, которой можно передать любую форму для валидации 
     _setEventListener() {
         const inputList = this._form.querySelectorAll(this._config.inputSelector);
@@ -54,11 +50,10 @@ export default class FormValidator {
         inputList.forEach(input => {
             input.addEventListener('input', (evt) => {
                 this._checkInputValidity(input);
-                this._setButtonState(this._form.checkValidity())
+                this.setButtonState(this._form.checkValidity())
             })
         });
     }
-
     // функция, которая будет находить все формы на странице по конкретному селектору и для каждой из этих форм вызывать setEventListener
     enableValidation() {
         this._setEventListener();
@@ -68,7 +63,7 @@ export default class FormValidator {
             evt.preventDefault();
         });
 
-        this._setButtonState(this._form.checkValidity())
+        this.setButtonState(this._form.checkValidity())
 
     }
     // функция сброса ошшибки инпута
