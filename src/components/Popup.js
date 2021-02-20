@@ -12,12 +12,26 @@ export default class Popup {
                 this.close();
             }
         });
-        this.setEventListeners();
     }
 
     close() {
         this._popup.classList.remove('popup_opened');
-        document.removeEventListener('keydown', this._handleEscClose)
+        document.removeEventListener('keydown', this._handleEscClose);
+        document.removeEventListener('click', (evt) => {
+            if (evt.target.classList.contains('popup_opened')) {
+                this.close();
+            }
+        });
+
+        const span = this._popup.querySelectorAll('.error');
+        span.forEach((item) => {
+            item.textContent = ''
+        })
+
+        const input = this._popup.querySelectorAll('.popup__input')
+        input.forEach((item) => {
+            item.classList.remove('popup__input_invalid')
+        })
     }
 
     _handleEscClose (evt) {
