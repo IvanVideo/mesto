@@ -8,19 +8,21 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-import nameProfile from '../utils/constants.js'
-
-const aboutProfile = document.querySelector('.profile__subtitle');
-const buttonAddElements = document.querySelector('.profile__button');
+import {nameProfile} from '../utils/constants.js';
+import {aboutProfile} from '../utils/constants.js';
+import {buttonAddElements} from '../utils/constants.js';
+import {buttonEditProfile} from '../utils/constants.js';
+import {formElement} from '../utils/constants.js';
+import {formAddEl} from '../utils/constants.js';
 
 const userInfo = new UserInfo({nameProfile, aboutProfile});
 const popupImage = new PopupWithImage('.popup-img');
 
 buttonAddElements.addEventListener('click', () => {
+
     popupAddElements.open();
 })
 
-const buttonEditProfile = document.querySelector('.profile__link');
 buttonEditProfile.addEventListener('click', () => {
     const inputName = document.querySelector('.popup__input_profile_name');
     const inputAbout = document.querySelector('.popup__input_profile_about');
@@ -34,6 +36,10 @@ const submitForm = new PopupWithForm({
     popupSelector: '.popup_profile',
     handleSubmitForm: (data) => {
         userInfo.setUserInfo(data);
+    },
+    handleClose:()=>{
+        validFormProfile.resetErrors();
+        validFormProfile.resetInputsError();
     }
  })
 
@@ -62,11 +68,14 @@ const popupAddElements = new PopupWithForm({
     popupSelector: '.popup-elements',
     handleSubmitForm: (initialCardElement) => {
         renderItem(initialCardElement);
+    },
+    handleClose:()=>{
+        formAddElements.resetErrors();
+        formAddElements.resetInputsError();
     }
 });
 
-const formElement = document.querySelector('.popup__form_profile');
-const formAddEl = document.querySelector('.popup__form_elements');
+
 const validFormProfile = new FormValidator(validationConfig, formElement);
 const formAddElements = new FormValidator(validationConfig, formAddEl);
 
@@ -75,4 +84,4 @@ validFormProfile.enableValidation();
 initialCardElement.renderElements();
 submitForm.setEventListeners();
 popupAddElements.setEventListeners();
-submitForm.setEventListeners();
+popupImage.setEventListeners();

@@ -22,16 +22,6 @@ export default class Popup {
                 this.close();
             }
         });
-
-        const span = this._popup.querySelectorAll('.error');
-        span.forEach((item) => {
-            item.textContent = ''
-        })
-
-        const input = this._popup.querySelectorAll('.popup__input')
-        input.forEach((item) => {
-            item.classList.remove('popup__input_invalid')
-        })
     }
 
     _handleEscClose (evt) {
@@ -42,7 +32,7 @@ export default class Popup {
 
     //добавляет слушатель клика на иконку закрытия попапа
     setEventListeners() {
-        const popupImgCloseButton = this._popup.querySelector('.popup-img__close')
+        const popupImgCloseButton = this._popup.querySelector('.popup__close')
         popupImgCloseButton.addEventListener('click', () => {
             this.close();
         });
