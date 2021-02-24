@@ -1,6 +1,8 @@
 export default class Card {
     constructor({data, showPopup}, templateSelector) {
         this._data = data;
+        this._currentId = data.currentId;
+        this._idOwner = data.owner._id;
         this._templateSelector = templateSelector;
         this._link = data.link;
         this._name = data.name;
@@ -40,7 +42,6 @@ export default class Card {
 
 
     _likeActive() {
-
         this._element.querySelector('.element__heart-like').classList.toggle('element__heart-like_active');
     }
 
