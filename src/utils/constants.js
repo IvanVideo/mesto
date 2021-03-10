@@ -1,4 +1,5 @@
 export const nameProfile = document.querySelector('.profile__title');
+export const avatarProfile = document.querySelector('.profile__image');
 export const aboutProfile = document.querySelector('.profile__subtitle');
 export const buttonAddElements = document.querySelector('.profile__button');
 export const buttonEditProfile = document.querySelector('.profile__link');
@@ -12,8 +13,7 @@ export const config = {
     'Content-Type': 'application/json'
   }
 };
-// export const avatar = document.querySelector('.rofile__opacity-image');
-// export const popupAvatar = document.querySelector('.popup-avatar');
+
 
 
 

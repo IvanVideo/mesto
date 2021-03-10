@@ -1,5 +1,5 @@
 export default class Card {
-    constructor({data, showPopup}, templateSelector) {
+    constructor({ data, showPopup, shwoPopupSubmit }, templateSelector) {
         this._data = data;
         this._currentId = data.currentId;
         this._idOwner = data.owner._id;
@@ -7,35 +7,40 @@ export default class Card {
         this._link = data.link;
         this._name = data.name;
         this._showPopup = showPopup;
+        this._shwoPopupSubmit = shwoPopupSubmit;
     }
     _getTemplate() {
         const productElement = document
-        .querySelector(this._templateSelector)
-        .content
-        .querySelector('.element')
-        .cloneNode(true);
+            .querySelector(this._templateSelector)
+            .content
+            .querySelector('.element')
+            .cloneNode(true);
         return productElement;
     }
 
     render() {
         this._element = this._getTemplate();
-        this._setEventListeners();
-        
+        this._trash = this._element.querySelector('.element__trash');
+        this._like = this._element.querySelector('.element__heart-like');
+        this._img = this._element.querySelector('.element__imag');
         this._element.querySelector('.element__imag').src = this._data.link;
         this._element.querySelector('.element__title').textContent = this._data.name;
         this._element.querySelector('.element__pic').value = this._data.name;
-
+        if (this._currentId !== this._idOwner) {
+            this._trash.remove();
+        }
+        this._setEventListeners();
         return this._element;
     }
 
     _setEventListeners() {
-        this._element.querySelector('.element__heart-like').addEventListener('click', () => {
+        this._like.addEventListener('click', () => {
             this._likeActive();
         });
-        this._element.querySelector('.element__trash').addEventListener('click', () => {
-            this._removeElement();
+        this._trash.addEventListener('click', () => {
+            this._shwoPopupSubmit(this._data, this._element)
         });
-        this._element.querySelector('.element__imag').addEventListener('click', () => {
+        this._img.addEventListener('click', () => {
             this._showPopup(this._name, this._link);
         });
     }

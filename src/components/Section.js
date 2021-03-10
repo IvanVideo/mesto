@@ -9,7 +9,11 @@ export default class Section {
             this._render(item);
         });
     }
-    addItems(element) {
-        this._container.append(element);
+    addItems(element, before = false) {
+        if(before){
+            this._container.append(element);
+        } else {
+            this._container.append(element);
+        }     
     }
 }
