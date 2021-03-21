@@ -5,6 +5,10 @@ export const buttonAddElements = document.querySelector('.profile__button');
 export const buttonEditProfile = document.querySelector('.profile__link');
 export const formElement = document.querySelector('.popup__form_profile');
 export const formAddEl = document.querySelector('.popup__form_elements');
+export const newNameProfile = document.querySelector('.profile__title');
+export const newAboutProfile = document.querySelector('.profile__subtitle');
+export const heartNumber = document.querySelector('.element__hert-namber');
+
 export const config = {
   groupId: 'cohort-20',
   url: 'https://mesto.nomoreparties.co/v1/',

@@ -11,6 +11,10 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import { nameProfile } from '../utils/constants.js';
 import { avatarProfile } from '../utils/constants.js';
+
+import { newNameProfile } from '../utils/constants.js';
+import { newAboutProfile } from '../utils/constants.js';
+import { heartNumber } from '../utils/constants.js';
 import { aboutProfile } from '../utils/constants.js';
 import { buttonAddElements } from '../utils/constants.js';
 import { buttonEditProfile } from '../utils/constants.js';
@@ -30,6 +34,8 @@ api.getAllInfo()
         userInfo.setUserAvatar(dataUser.avatar);
         userInfo.setUserId(dataUser._id);
         initialCardElement.renderElements(cardsData);
+        // console.log(cardsData[3].likes.length, 'лайки')
+        // heartNumber.textContent = cardData[likes.length];
         console.log(dataUser);
         console.log(cardsData);
     })
@@ -38,6 +44,7 @@ api.getAllInfo()
 
 //Профиль///// Открываем попап аватарки
 const avatarEditButton = document.querySelector('.profile__opacity-image');
+// const avatarUrl = document.querySelector('.popup__input_avata');
 avatarEditButton.addEventListener('click', () => {
     newProfileInfo.open();
 })
@@ -45,10 +52,10 @@ avatarEditButton.addEventListener('click', () => {
 ///// Сабмит авы
 const newProfileInfo = new PopupWithForm({
     popupSelector: '.popup-avatar',
-    handleFormSubmit: () => {
-        api.setNewAvatarInfo()
+    handleFormSubmit: (avatarUrl) => {
+        api.editAvatar(avatarUrl)
             .then((res) => {
-                userInfo.setUserInfo(res)
+                userInfo.setUserAvatar(res)
             })
     },
     handleClose: () => {
@@ -57,6 +64,7 @@ const newProfileInfo = new PopupWithForm({
     }
 
 })
+
 newProfileInfo.setEventListeners()
 
 
@@ -110,6 +118,8 @@ buttonAddElements.addEventListener('click', () => {
     popupAddElements.open();
 })
 
+
+// Редактирование профиля
 buttonEditProfile.addEventListener('click', () => {
     const inputName = document.querySelector('.popup__input_profile_name');
     const inputAbout = document.querySelector('.popup__input_profile_about');
@@ -121,14 +131,31 @@ buttonEditProfile.addEventListener('click', () => {
 
 const submitForm = new PopupWithForm({
     popupSelector: '.popup_profile',
-    handleSubmitForm: (data) => {
-        userInfo.setUserInfo(data);
+    handleSubmitForm: (inputName, inputAbout) => {
+        api.editProfileInfo(inputName, inputAbout)
+            .then((data) => {
+                newNameProfile.textContent = data.name;
+                newAboutProfile.textContent = data.about;
+            })
     },
     handleClose: () => {
         validFormProfile.resetErrors();
         validFormProfile.resetInputsError();
     }
 })
+
+
+
+// const submitForm = new PopupWithForm({
+//     popupSelector: '.popup_profile',
+//     handleSubmitForm: (data) => {
+//         userInfo.setUserInfo(data);
+//     },
+//     handleClose: () => {
+//         validFormProfile.resetErrors();
+//         validFormProfile.resetInputsError();
+//     }
+// })
 
 function renderItem(item) {
     const newElement = createCard(item);

@@ -65,13 +65,13 @@ export default class Api {
             })
     }
 
-    editProfileInfo(newName, newAbout) {
-        return fetch(`${this._url}/${this._groupId}/user/me`, {
+    editProfileInfo(data) {
+        return fetch(`${this._url}/${this._groupId}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: newName,
-                about: newAbout
+                name: data.name,
+                about: data.about
             })
         })
             .then(res => {

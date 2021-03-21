@@ -11,7 +11,7 @@ export default class Section {
     }
     addItems(element, before = false) {
         if(before){
-            this._container.append(element);
+            this._container.prepend(element);
         } else {
             this._container.append(element);
         }     
