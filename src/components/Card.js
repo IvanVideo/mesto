@@ -1,5 +1,5 @@
 export default class Card {
-    constructor({ data, showPopup, shwoPopupSubmit }, templateSelector) {
+    constructor({ data, showPopup, shwoPopupSubmit, addLike}, templateSelector) {
         this._data = data;
         this._currentId = data.currentId;
         this._idOwner = data.owner._id;
@@ -8,6 +8,7 @@ export default class Card {
         this._name = data.name;
         this._showPopup = showPopup;
         this._shwoPopupSubmit = shwoPopupSubmit;
+        this._addLike = addLike;
     }
     _getTemplate() {
         const productElement = document
@@ -38,6 +39,7 @@ export default class Card {
     _setEventListeners() {
         this._like.addEventListener('click', () => {
             this._likeActive();
+            this._addLike();
         });
         this._trash.addEventListener('click', () => {
             this._shwoPopupSubmit(this._data, this._element)

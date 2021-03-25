@@ -82,12 +82,12 @@ export default class Api {
             })
     }
 
-    editAvatar() {
+    editAvatar(data) {
         return fetch(`${this._url}/${this._groupId}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                avatar: this._avatar
+                avatar: data
             })
         })
             .then(res => {
@@ -98,7 +98,7 @@ export default class Api {
             })
     }
 
-    addLike() {
+    setLike() {
         return fetch(`${this._url}/${this._groupId}/cards/likes/${id}`, {
             method: 'PUT',
             headers: this._headers,

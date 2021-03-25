@@ -44,11 +44,12 @@ avatarEditButton.addEventListener('click', () => {
     newProfileInfo.open();
 })
 
+
 ///// Сабмит авы
 const newProfileInfo = new PopupWithForm({
     popupSelector: '.popup-avatar',
-    handleSubmitForm: () => {
-        api.editAvatar()
+    handleSubmitForm: (data) => {
+        api.editAvatar(data.link)
             .then((res) => {
                 userInfo.setUserAvatar(res)
             })
@@ -81,7 +82,8 @@ function createCard(item) {
     return new Card({
         data: { ...item, currentId: userInfo.getMyId() },
         showPopup,
-        shwoPopupSubmit
+        shwoPopupSubmit,
+        addLike
     },
         '.template').render();
 }
@@ -104,9 +106,13 @@ const popupAddElements = new PopupWithForm({
 });
 
 // Лайк карточки
-// function likeActive() {
-    
-// }
+function addLike(data) {
+    // api.setLike(data._id)
+    // .then(() => {
+    //    this._likeActive();
+    // })
+    console.log('Привет я хочу лайк поставить')
+}
 
 const userInfo = new UserInfo({ nameProfile, aboutProfile, avatarProfile });
 const popupImage = new PopupWithImage('.popup-img');
