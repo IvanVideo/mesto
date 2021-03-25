@@ -22,8 +22,6 @@ import { formElement } from '../utils/constants.js';
 import { formAddEl } from '../utils/constants.js';
 import { config } from '../utils/constants.js';
 import Popup from '../components/Popup';
-// import { Template } from 'webpack';
-// import {avatar} from '../utils/constants.js';
 
 const api = new Api(config);
 
@@ -34,8 +32,6 @@ api.getAllInfo()
         userInfo.setUserAvatar(dataUser.avatar);
         userInfo.setUserId(dataUser._id);
         initialCardElement.renderElements(cardsData);
-        // console.log(cardsData[3].likes.length, 'лайки')
-        // heartNumber.textContent = cardData[likes.length];
         console.log(dataUser);
         console.log(cardsData);
     })
@@ -44,7 +40,6 @@ api.getAllInfo()
 
 //Профиль///// Открываем попап аватарки
 const avatarEditButton = document.querySelector('.profile__opacity-image');
-// const avatarUrl = document.querySelector('.popup__input_avata');
 avatarEditButton.addEventListener('click', () => {
     newProfileInfo.open();
 })
@@ -52,8 +47,8 @@ avatarEditButton.addEventListener('click', () => {
 ///// Сабмит авы
 const newProfileInfo = new PopupWithForm({
     popupSelector: '.popup-avatar',
-    handleFormSubmit: (avatarUrl) => {
-        api.editAvatar(avatarUrl)
+    handleSubmitForm: () => {
+        api.editAvatar()
             .then((res) => {
                 userInfo.setUserAvatar(res)
             })
@@ -108,8 +103,10 @@ const popupAddElements = new PopupWithForm({
     }
 });
 
-
-
+// Лайк карточки
+// function likeActive() {
+    
+// }
 
 const userInfo = new UserInfo({ nameProfile, aboutProfile, avatarProfile });
 const popupImage = new PopupWithImage('.popup-img');
@@ -144,8 +141,6 @@ const submitForm = new PopupWithForm({
     }
 })
 
-
-
 // const submitForm = new PopupWithForm({
 //     popupSelector: '.popup_profile',
 //     handleSubmitForm: (data) => {
@@ -160,29 +155,17 @@ const submitForm = new PopupWithForm({
 function renderItem(item) {
     const newElement = createCard(item);
     initialCardElement.addItems(newElement);
+    // showLikes(item);
 }
 
 const initialCardElement = new Section(
-    renderItem
-    , '.elements'
+    renderItem,
+    '.elements'
 );
 
 function showPopup(name, link) {
     popupImage.open(name, link);
 }
-
-
-// const popupAddElements = new PopupWithForm({
-//     popupSelector: '.popup-elements',
-//     handleSubmitForm: (initialCardElement) => {
-//         renderItem(initialCardElement);
-//     },
-//     handleClose:()=>{
-//         formAddElements.resetErrors();
-//         formAddElements.resetInputsError();
-//     }
-// });
-
 
 const validFormProfile = new FormValidator(validationConfig, formElement);
 const formAddElements = new FormValidator(validationConfig, formAddEl);

@@ -98,6 +98,35 @@ export default class Api {
             })
     }
 
+    addLike() {
+        return fetch(`${this._url}/${this._groupId}/cards/likes/${id}`, {
+            method: 'PUT',
+            headers: this._headers,
+            body: JSON.stringify({
+            })
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Ошибка на сервере`)
+            })
+    }
+    
+    removeLike() {
+        return fetch(`${this._url}/${this._groupId}/cards/likes/${id}`, {
+            method: 'DELETE',
+            headers: this._headers,
+            body: JSON.stringify({
+            })
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return Promise.reject(`Ошибка на сервере`)
+            })
+    }
 
 
 }

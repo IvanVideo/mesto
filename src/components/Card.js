@@ -23,6 +23,8 @@ export default class Card {
         this._trash = this._element.querySelector('.element__trash');
         this._like = this._element.querySelector('.element__heart-like');
         this._img = this._element.querySelector('.element__imag');
+        this._likeNumber = this._element.querySelector('.element__hert-namber');
+        this._likeNumber.textContent = this._data.likes.length;
         this._element.querySelector('.element__imag').src = this._data.link;
         this._element.querySelector('.element__title').textContent = this._data.name;
         this._element.querySelector('.element__pic').value = this._data.name;
