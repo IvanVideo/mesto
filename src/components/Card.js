@@ -1,14 +1,15 @@
 export default class Card {
-    constructor({ data, showPopup, shwoPopupSubmit, addLike}, templateSelector) {
+    constructor({ data, showPopup, shwoPopupSubmit, handleLikeClick}, templateSelector) {
         this._data = data;
         this._currentId = data.currentId;
         this._idOwner = data.owner._id;
         this._templateSelector = templateSelector;
         this._link = data.link;
         this._name = data.name;
+        this._id = data._id
         this._showPopup = showPopup;
         this._shwoPopupSubmit = shwoPopupSubmit;
-        this._addLike = addLike;
+        this._handleLikeClick = handleLikeClick;
     }
     _getTemplate() {
         const productElement = document
@@ -29,17 +30,30 @@ export default class Card {
         this._element.querySelector('.element__imag').src = this._data.link;
         this._element.querySelector('.element__title').textContent = this._data.name;
         this._element.querySelector('.element__pic').value = this._data.name;
+        this._activeLike(this._statusLike(this._data.likes, this._currentId));
         if (this._currentId !== this._idOwner) {
             this._trash.remove();
         }
+
         this._setEventListeners();
         return this._element;
     }
 
+    _activeLike(data) { 
+        if(data === true){
+            this._element.querySelector('.element__heart-like').classList.toggle('element__heart-like_active');
+        }
+    }
+
+    _statusLike(data) {
+        return data.some((item) => {
+            return  item._id === this._currentId
+        })
+    }
+
     _setEventListeners() {
         this._like.addEventListener('click', () => {
-            this._likeActive();
-            this._addLike();
+            this._handleLikeClick(this._id, this._statusLike(this._data.likes, this._currentId));
         });
         this._trash.addEventListener('click', () => {
             this._shwoPopupSubmit(this._data, this._element)

@@ -98,7 +98,7 @@ export default class Api {
             })
     }
 
-    setLike() {
+    setLike(id) {
         return fetch(`${this._url}/${this._groupId}/cards/likes/${id}`, {
             method: 'PUT',
             headers: this._headers,
@@ -113,7 +113,7 @@ export default class Api {
             })
     }
     
-    removeLike() {
+    removeLike(id) {
         return fetch(`${this._url}/${this._groupId}/cards/likes/${id}`, {
             method: 'DELETE',
             headers: this._headers,

@@ -11,17 +11,14 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import { nameProfile } from '../utils/constants.js';
 import { avatarProfile } from '../utils/constants.js';
-
 import { newNameProfile } from '../utils/constants.js';
 import { newAboutProfile } from '../utils/constants.js';
-import { heartNumber } from '../utils/constants.js';
 import { aboutProfile } from '../utils/constants.js';
 import { buttonAddElements } from '../utils/constants.js';
 import { buttonEditProfile } from '../utils/constants.js';
 import { formElement } from '../utils/constants.js';
 import { formAddEl } from '../utils/constants.js';
 import { config } from '../utils/constants.js';
-import Popup from '../components/Popup';
 
 const api = new Api(config);
 
@@ -32,8 +29,6 @@ api.getAllInfo()
         userInfo.setUserAvatar(dataUser.avatar);
         userInfo.setUserId(dataUser._id);
         initialCardElement.renderElements(cardsData);
-        console.log(dataUser);
-        console.log(cardsData);
     })
     .catch(err => console.log(err))
 
@@ -52,6 +47,9 @@ const newProfileInfo = new PopupWithForm({
         api.editAvatar(data.link)
             .then((res) => {
                 userInfo.setUserAvatar(res)
+            })
+            .catch((err) => {
+                console.log(err)
             })
     },
     handleClose: () => {
@@ -83,10 +81,34 @@ function createCard(item) {
         data: { ...item, currentId: userInfo.getMyId() },
         showPopup,
         shwoPopupSubmit,
-        addLike
+        handleLikeClick
     },
         '.template').render();
 }
+
+// Лайк карточки
+function handleLikeClick(id, status) {
+    if (status === true) {
+        api.removeLike(id)
+            .then(() => {
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    } else {
+        api.setLike(id)
+            .then(() => {
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+}
+
+// Снятие лайка
 
 ///// Инициализируем класс попапа подтверждения
 const deletItem = new PopupWithSubmit('.popup-remove')
@@ -102,17 +124,12 @@ const popupAddElements = new PopupWithForm({
                 const newElement = createCard(data);
                 initialCardElement.addItems(newElement, true);
             })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 });
 
-// Лайк карточки
-function addLike(data) {
-    // api.setLike(data._id)
-    // .then(() => {
-    //    this._likeActive();
-    // })
-    console.log('Привет я хочу лайк поставить')
-}
 
 const userInfo = new UserInfo({ nameProfile, aboutProfile, avatarProfile });
 const popupImage = new PopupWithImage('.popup-img');
@@ -147,21 +164,9 @@ const submitForm = new PopupWithForm({
     }
 })
 
-// const submitForm = new PopupWithForm({
-//     popupSelector: '.popup_profile',
-//     handleSubmitForm: (data) => {
-//         userInfo.setUserInfo(data);
-//     },
-//     handleClose: () => {
-//         validFormProfile.resetErrors();
-//         validFormProfile.resetInputsError();
-//     }
-// })
-
 function renderItem(item) {
     const newElement = createCard(item);
     initialCardElement.addItems(newElement);
-    // showLikes(item);
 }
 
 const initialCardElement = new Section(
