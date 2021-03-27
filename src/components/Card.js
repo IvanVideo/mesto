@@ -51,26 +51,33 @@ export default class Card {
         })
     }
 
+    _removeElement(data) {
+        data.closest('.element').remove();
+        data = null;
+    }
+
     _setEventListeners() {
         this._like.addEventListener('click', () => {
-            this._handleLikeClick(this._id, this._statusLike(this._data.likes, this._currentId));
+            this._handleLikeClick(this._data, this._statusLike(this._data.likes, this._currentId), this._refreshLikes, this._element, this._activeLike, this._activeLikesStatus);
         });
         this._trash.addEventListener('click', () => {
-            this._shwoPopupSubmit(this._data, this._element)
+            this._shwoPopupSubmit(this._data, this._element, this._removeElement);
         });
         this._img.addEventListener('click', () => {
             this._showPopup(this._name, this._link);
         });
     }
 
+    _refreshLikes(data, card) {
+        let numbersOfLikes = card.querySelector('.element__hert-namber');
+        numbersOfLikes.textContent = data.likes.length;
+    }
 
     _likeActive() {
         this._element.querySelector('.element__heart-like').classList.toggle('element__heart-like_active');
     }
 
-    _removeElement() {
-
-        this._element.closest('.element').remove();
-        this._element = null;
+    _activeLikesStatus(status, activeLike) {
+        activeLike(status);
     }
 }

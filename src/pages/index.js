@@ -30,7 +30,9 @@ api.getAllInfo()
         userInfo.setUserId(dataUser._id);
         initialCardElement.renderElements(cardsData);
     })
-    .catch(err => console.log(err))
+    .catch((err) => {
+        console.log(err)
+    })
 
 
 //Профиль///// Открываем попап аватарки
@@ -46,10 +48,14 @@ const newProfileInfo = new PopupWithForm({
     handleSubmitForm: (data) => {
         api.editAvatar(data.link)
             .then((res) => {
-                userInfo.setUserAvatar(res)
+                userInfo.setUserAvatar(res);
+                newProfileInfo.close()
             })
             .catch((err) => {
                 console.log(err)
+            })
+            .finally(() => {
+                newProfileInfo.renderLoading(false)
             })
     },
     handleClose: () => {
@@ -59,19 +65,24 @@ const newProfileInfo = new PopupWithForm({
 
 })
 
+
+
 newProfileInfo.setEventListeners()
 
 
 //Удаление карточки/// Функция открытия попапа подтверждения
-function shwoPopupSubmit(data, element) {
+function shwoPopupSubmit(data, element, remove) {
     deletItem.openPopup()
     deletItem.setSubmitRemove(() => {
         api.deleteItem(data._id)
             .then(() => {
-                element.remove();
+                remove(element)
             })
             .catch((err) => {
                 console.log(err)
+            })
+            .finally(() => {
+                newProfileInfo.renderLoading(false)
             })
     })
 }
@@ -81,32 +92,53 @@ function createCard(item) {
         data: { ...item, currentId: userInfo.getMyId() },
         showPopup,
         shwoPopupSubmit,
-        handleLikeClick
+        handleLikeClick: (card, status, refresh, element, activeLike, activeLikeStatus) => {
+            // console.log(card, 'asassasasasas')
+            if (status === true) {
+                api.removeLike(card._id)
+                    .then(() => {
+                            
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            } else {
+                api.setLike(card._id)
+                    .then((data) => {
+                        refresh(data, element);
+                        activeLikeStatus(status, activeLike)
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+        },
     },
         '.template').render();
 }
 
 // Лайк карточки
-function handleLikeClick(id, status) {
-    if (status === true) {
-        api.removeLike(id)
-            .then(() => {
+// function handleLikeClick(id, status) {
+//     if (status === true) {
+//         api.removeLike(id)
+//             .then(() => {
+                    
+//             })
+//             .catch((err) => {
+//                 console.log(err)
+//             })
+//     } else {
+//         api.setLike(id)
+//             .then(() => {
+//                 // .refreshLikes();
+//                 console.log('сразу обновил')
+//             })
+//             .catch((err) => {
+//                 console.log(err)
+//             })
+//     }
 
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    } else {
-        api.setLike(id)
-            .then(() => {
-
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-
-}
+// }
 
 // Снятие лайка
 
@@ -123,6 +155,7 @@ const popupAddElements = new PopupWithForm({
             .then((data) => {
                 const newElement = createCard(data);
                 initialCardElement.addItems(newElement, true);
+                popupAddElements.close();
             })
             .catch((err) => {
                 console.log(err)
@@ -151,11 +184,15 @@ buttonEditProfile.addEventListener('click', () => {
 
 const submitForm = new PopupWithForm({
     popupSelector: '.popup_profile',
-    handleSubmitForm: (inputName, inputAbout) => {
-        api.editProfileInfo(inputName, inputAbout)
+    handleSubmitForm: (infoUser) => {
+        api.editProfileInfo(infoUser)
             .then((data) => {
                 newNameProfile.textContent = data.name;
                 newAboutProfile.textContent = data.about;
+                submitForm.close();
+            })
+            .finally(() => {
+                newProfileInfo.renderLoading(false)
             })
     },
     handleClose: () => {

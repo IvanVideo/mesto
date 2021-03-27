@@ -5,6 +5,13 @@ export default class Api {
         this._groupId = groupId;
     }
 
+    _getResponseData(res) {
+        if (res.ok) {
+            return res.json()
+        }
+        return Promise.reject(`Ошибка на сервере`)
+    }
+
     getAllInfo() {
         return Promise.all([this.getUserInfo(), this.getCards()]);
     }
@@ -14,10 +21,7 @@ export default class Api {
             headers: this._headers,
         })
             .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Ошибка на сервере`)
+                return this._getResponseData(res);
             })
     }
 
@@ -26,10 +30,7 @@ export default class Api {
             headers: this._headers,
         })
             .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Ошибка на сервере`)
+                return this._getResponseData(res);
             })
     }
 
@@ -43,10 +44,7 @@ export default class Api {
             })
         })
             .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Ошибка на сервере`)
+                return this._getResponseData(res);
             })
     }
 
@@ -58,10 +56,7 @@ export default class Api {
             })
         })
             .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Ошибка на сервере`)
+                return this._getResponseData(res);
             })
     }
 
@@ -75,10 +70,7 @@ export default class Api {
             })
         })
             .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Ошибка на сервере`)
+                return this._getResponseData(res);
             })
     }
 
@@ -91,10 +83,7 @@ export default class Api {
             })
         })
             .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Ошибка на сервере`)
+                return this._getResponseData(res);
             })
     }
 
@@ -106,10 +95,7 @@ export default class Api {
             })
         })
             .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Ошибка на сервере`)
+                return this._getResponseData(res);
             })
     }
     
@@ -121,10 +107,7 @@ export default class Api {
             })
         })
             .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                return Promise.reject(`Ошибка на сервере`)
+                return this._getResponseData(res);
             })
     }
 
