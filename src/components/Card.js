@@ -30,19 +30,15 @@ export default class Card {
         this._element.querySelector('.element__imag').src = this._data.link;
         this._element.querySelector('.element__title').textContent = this._data.name;
         this._element.querySelector('.element__pic').value = this._data.name;
-        this._activeLike(this._statusLike(this._data.likes, this._currentId));
         if (this._currentId !== this._idOwner) {
             this._trash.remove();
         }
 
+        if(this._statusLike(this._data.likes)) {
+            this._like.classList.add('element__heart-like_active');
+        }
         this._setEventListeners();
         return this._element;
-    }
-
-    _activeLike(data) { 
-        if(data === true){
-            this._element.querySelector('.element__heart-like').classList.toggle('element__heart-like_active');
-        }
     }
 
     _statusLike(data) {
@@ -58,7 +54,7 @@ export default class Card {
 
     _setEventListeners() {
         this._like.addEventListener('click', () => {
-            this._handleLikeClick(this._data, this._statusLike(this._data.likes, this._currentId), this._refreshLikes, this._element, this._activeLike, this._activeLikesStatus);
+            this._handleLikeClick(this._data, this._statusLike(this._data.likes, this._currentId), this._refreshLikes, this._element, this._activeLikesStatus);
         });
         this._trash.addEventListener('click', () => {
             this._shwoPopupSubmit(this._data, this._element, this._removeElement);
@@ -77,7 +73,12 @@ export default class Card {
         this._element.querySelector('.element__heart-like').classList.toggle('element__heart-like_active');
     }
 
-    _activeLikesStatus(status, activeLike) {
-        activeLike(status);
+    _activeLikesStatus(status, element) {
+        const elementLike = element.querySelector('.element__heart-like');
+        if(status === false){
+            elementLike.classList.add('element__heart-like_active');
+        } else {
+            elementLike.classList.remove('element__heart-like_active');
+        }
     }
 }

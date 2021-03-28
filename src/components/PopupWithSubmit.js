@@ -13,13 +13,16 @@ export default class PopupWithSubmit extends Popup {
         this._handlerSubmitForm = submitHandler;
     }
 
+    close() {
+        super.close();
+    }
+
     setEventListeners() {
         super.setEventListeners();
 
         this._popupForm.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._handlerSubmitForm()
-            super.close();
         });
     }
 }

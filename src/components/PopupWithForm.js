@@ -19,6 +19,16 @@ export default class PopupWithForm extends Popup {
         return this._formValues;
     }
 
+    openCreate() {
+        super.open();
+        this._popupButton.textContent = 'Создать';
+    }
+
+    openSave() {
+        super.open();
+        this._popupButton.textContent = 'Сохранить';
+    }
+
     close(){
         if(typeof this._handleClose === 'function'){
             this._handleClose();

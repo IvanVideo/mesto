@@ -38,7 +38,7 @@ api.getAllInfo()
 //Профиль///// Открываем попап аватарки
 const avatarEditButton = document.querySelector('.profile__opacity-image');
 avatarEditButton.addEventListener('click', () => {
-    newProfileInfo.open();
+    newProfileInfo.openSave();
 })
 
 
@@ -76,6 +76,7 @@ function shwoPopupSubmit(data, element, remove) {
     deletItem.setSubmitRemove(() => {
         api.deleteItem(data._id)
             .then(() => {
+                deletItem.close();
                 remove(element)
             })
             .catch((err) => {
@@ -92,12 +93,12 @@ function createCard(item) {
         data: { ...item, currentId: userInfo.getMyId() },
         showPopup,
         shwoPopupSubmit,
-        handleLikeClick: (card, status, refresh, element, activeLike, activeLikeStatus) => {
-            // console.log(card, 'asassasasasas')
+        handleLikeClick: (card, status, refresh, element, activeLikeStatus) => {
             if (status === true) {
                 api.removeLike(card._id)
-                    .then(() => {
-                            
+                    .then((data) => {
+                        refresh(data, element); 
+                        activeLikeStatus(status, element)   
                     })
                     .catch((err) => {
                         console.log(err)
@@ -106,7 +107,7 @@ function createCard(item) {
                 api.setLike(card._id)
                     .then((data) => {
                         refresh(data, element);
-                        activeLikeStatus(status, activeLike)
+                        activeLikeStatus(status, element)
                     })
                     .catch((err) => {
                         console.log(err)
@@ -116,31 +117,6 @@ function createCard(item) {
     },
         '.template').render();
 }
-
-// Лайк карточки
-// function handleLikeClick(id, status) {
-//     if (status === true) {
-//         api.removeLike(id)
-//             .then(() => {
-                    
-//             })
-//             .catch((err) => {
-//                 console.log(err)
-//             })
-//     } else {
-//         api.setLike(id)
-//             .then(() => {
-//                 // .refreshLikes();
-//                 console.log('сразу обновил')
-//             })
-//             .catch((err) => {
-//                 console.log(err)
-//             })
-//     }
-
-// }
-
-// Снятие лайка
 
 ///// Инициализируем класс попапа подтверждения
 const deletItem = new PopupWithSubmit('.popup-remove')
@@ -168,7 +144,7 @@ const userInfo = new UserInfo({ nameProfile, aboutProfile, avatarProfile });
 const popupImage = new PopupWithImage('.popup-img');
 
 buttonAddElements.addEventListener('click', () => {
-    popupAddElements.open();
+    popupAddElements.openCreate();
 })
 
 
@@ -176,7 +152,7 @@ buttonAddElements.addEventListener('click', () => {
 buttonEditProfile.addEventListener('click', () => {
     const inputName = document.querySelector('.popup__input_profile_name');
     const inputAbout = document.querySelector('.popup__input_profile_about');
-    submitForm.open();
+    submitForm.openSave();
     const infoUser = userInfo.getUserInfo();
     inputName.value = infoUser.name;
     inputAbout.value = infoUser.about;
