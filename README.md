@@ -1,7 +1,7 @@
 # mesto
 ### учебный проект
 
-***Cтек технологий проекта***
+***Cтек технологий проекта***  
 ![Node.js](https://img.shields.io/badge/-html5-cae3fa?style=for-the-badge&logo=node.js@logoColor=00eeff) ![JavaScript](https://img.shields.io/badge/-CSS-cae3fa?style=for-the-badge&logo=javascript@logoColor=00eeff) ![React](https://img.shields.io/badge/-JavaScript-cae3fa?style=for-the-badge&logo=react@logoColor=00eeff) 
 
 Данный проект является упрощенной моделью хостинга фотокарточек, которые могут просматривать и лайкать множество пользователей.
